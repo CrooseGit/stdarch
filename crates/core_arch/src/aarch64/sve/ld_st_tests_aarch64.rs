@@ -1703,6 +1703,7 @@ unsafe fn test_svld1rq_u16() {
         ),
     );
 }
+#[unsafe(no_mangle)]
 #[simd_test(enable = "sve")]
 unsafe fn test_svld1rq_u32() {
     svsetffr();

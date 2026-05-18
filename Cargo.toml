@@ -2,7 +2,7 @@
 resolver = "3"
 members = [
   "crates/*",
-  "examples",
+  "examples", "minrepr",
 ]
 exclude = [
   "crates/wasm-assert-instr-tests",

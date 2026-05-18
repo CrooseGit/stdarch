@@ -91,8 +91,11 @@ cargo_test() {
 
 CORE_ARCH="--manifest-path=crates/core_arch/Cargo.toml"
 STDARCH_EXAMPLES="--manifest-path=examples/Cargo.toml"
+MIN_REPR="--manifest-path=minrepr/Cargo.toml"
 
-cargo_test "${CORE_ARCH}"
+for i in {1..500}; do
+  cargo_test "${MIN_REPR}"
+done
 
 if [ "$NOSTD" != "1" ]; then
     cargo_test "${STDARCH_EXAMPLES}"
@@ -145,3 +148,5 @@ if [ "$NORUN" != "1" ] && [ "$NOSTD" != 1 ]; then
         echo test | cargo run --target "${TARGET}" --profile "${PROFILE}" hex
     )
 fi
+
+
