@@ -70,7 +70,7 @@ cargo_test() {
         export subcmd="build"
     fi
     cmd="$cmd ${subcmd} --target=$TARGET --profile=$PROFILE $1"
-    cmd="$cmd -- $2"
+    cmd="$cmd -- $2 --test-threads=1"
 
     case ${TARGET} in
         # wasm targets can't catch panics so if a test failures make sure the test
