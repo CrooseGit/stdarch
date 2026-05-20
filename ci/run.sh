@@ -63,12 +63,18 @@ echo "STDARCH_TEST_SKIP_FEATURE=${STDARCH_TEST_SKIP_FEATURE}"
 echo "STDARCH_TEST_SKIP_FUNCTION=${STDARCH_TEST_SKIP_FUNCTION}"
 echo "PROFILE=${PROFILE}"
 
+cargo_run() {
+    cmd="cargo"
+    subcmd="run"
+    cmd="$cmd ${subcmd} --target=$TARGET --profile=$PROFILE $1"
+    cmd="$cmd -- $2"
+
+   $cmd
+}
+
 cargo_test() {
     cmd="cargo"
     subcmd="test"
-    if [ "$NORUN" = "1" ]; then
-        export subcmd="build"
-    fi
     cmd="$cmd ${subcmd} --target=$TARGET --profile=$PROFILE $1"
     cmd="$cmd -- $2"
 
@@ -78,9 +84,10 @@ cargo_test() {
 CORE_ARCH="--manifest-path=crates/core_arch/Cargo.toml"
 STDARCH_EXAMPLES="--manifest-path=examples/Cargo.toml"
 MIN_REPR="--manifest-path=minrepr/Cargo.toml"
+THREAD_REPR="--manifest-path=threadrepr/Cargo.toml"
 
-for i in {1..500}; do
-  cargo_test "${MIN_REPR}" "--test-threads=11"
+for i in {1..40}; do
+  cargo_run "${THREAD_REPR}" 
 done
 
 
