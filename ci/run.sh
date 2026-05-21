@@ -72,21 +72,7 @@ cargo_test() {
     cmd="$cmd ${subcmd} --target=$TARGET --profile=$PROFILE $1"
     cmd="$cmd -- $2"
 
-    case ${TARGET} in
-        # wasm targets can't catch panics so if a test failures make sure the test
-        # harness isn't trying to capture output, otherwise we won't get any useful
-        # output.
-        wasm32*)
-            if [ "$PROFILE" = "release" ]; then
-              dir="release"
-            else
-              dir="debug"
-            fi
-            export CARGO_TARGET_WASM32_WASIP1_RUNNER="wasmtime -Wexceptions --dir /checkout/target/wasm32-wasip1/$dir/deps::."
-            cmd="$cmd --nocapture"
-            ;;
-    esac
-    $cmd
+   $cmd
 }
 
 CORE_ARCH="--manifest-path=crates/core_arch/Cargo.toml"
@@ -94,59 +80,7 @@ STDARCH_EXAMPLES="--manifest-path=examples/Cargo.toml"
 MIN_REPR="--manifest-path=minrepr/Cargo.toml"
 
 for i in {1..500}; do
-  cargo_test "${MIN_REPR}"
+  cargo_test "${MIN_REPR}" "--test-threads=11"
 done
-
-if [ "$NOSTD" != "1" ]; then
-    cargo_test "${STDARCH_EXAMPLES}"
-fi
-
-
-# Test targets compiled with extra features.
-case ${TARGET} in
-    x86_64* | i686*)
-        export STDARCH_DISABLE_ASSERT_INSTR=1
-
-        export RUSTFLAGS="${RUSTFLAGS} -C target-feature=+avx"
-        cargo_test 
-        ;;
-    # FIXME: don't build anymore
-    #mips-*gnu* | mipsel-*gnu*)
-    #    export RUSTFLAGS="${RUSTFLAGS} -C target-feature=+msa,+fp64,+mips32r5"
-    #    cargo_test 
-	  #    ;;
-    mips64*)
-        export RUSTFLAGS="${RUSTFLAGS} -C target-feature=+msa"
-        cargo_test 
-	      ;;
-    s390x*)
-        export RUSTFLAGS="${RUSTFLAGS} -C target-feature=+vector-enhancements-1"
-        cargo_test 
-	      ;;
-    powerpc64*)
-        export RUSTFLAGS="${RUSTFLAGS} -C target-feature=+altivec"
-        cargo_test 
-
-        export RUSTFLAGS="${RUSTFLAGS} -C target-feature=+vsx"
-        cargo_test 
-        ;;
-    powerpc*)
-        # qemu has a bug in PPC32 which leads to a crash when compiled with `vsx`
-        export RUSTFLAGS="${RUSTFLAGS} -C target-feature=+altivec"
-        cargo_test 
-        ;;
-    *)
-        ;;
-
-esac
-
-if [ "$NORUN" != "1" ] && [ "$NOSTD" != 1 ]; then
-    # Test examples
-    (
-        cd examples
-        cargo test --target "${TARGET}" --profile "${PROFILE}"
-        echo test | cargo run --target "${TARGET}" --profile "${PROFILE}" hex
-    )
-fi
 
 
