@@ -22,7 +22,7 @@ fn main() {
                 .name(format!("thread_{}", i))
                 .spawn(|| {
                     pin_thread_to_cpu_0();
-                    unsafe { test_svld1rq_s32() }
+                    unsafe { test_thread_function() }
                 })
                 .expect("failed to spawn thread")
         })
@@ -48,10 +48,10 @@ unsafe extern "system" {
 
 /// Set FFR, load, then read FFR
 #[target_feature(enable = "sve")]
-unsafe fn test_svld1rq_s32() {
+unsafe fn test_thread_function() {
     unsafe {
         svsetffr();
-        let _loaded = svld1rq_s32(svptrue_b32(), I32_DATA.as_ptr());
+        let _loaded = svldff1_s32(svptrue_b32(), I32_DATA.as_ptr());
         let defined = svrdffr();
         assert!(!svptest_any(
             svptrue_b32(),
