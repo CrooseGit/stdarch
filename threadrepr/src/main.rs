@@ -47,6 +47,7 @@ unsafe extern "system" {
 }
 
 /// Set FFR, load, then read FFR
+#[unsafe(no_mangle)]
 #[target_feature(enable = "sve")]
 unsafe fn test_thread_function() {
     unsafe {

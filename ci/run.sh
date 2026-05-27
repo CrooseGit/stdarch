@@ -86,8 +86,20 @@ STDARCH_EXAMPLES="--manifest-path=examples/Cargo.toml"
 MIN_REPR="--manifest-path=minrepr/Cargo.toml"
 THREAD_REPR="--manifest-path=threadrepr/Cargo.toml"
 
-for i in {1..40}; do
+export CARGO_PROFILE_RELEASE_DEBUG=0
+
+
+RUST_ASM="rust.s"
+cargo rustc ${THREAD_REPR} --target "${TARGET}" --profile "${PROFILE}" -- --emit="asm=${RUST_ASM}"
+echo "======== ASM ======="
+awk '
+    /test_thread_function:/ { in_fn = 1; seen = 1 }
+    in_fn { print }
+    in_fn && /^[[:space:]]*\.(cfi_endproc|seh_endproc)$/ { done = 1; exit }
+    END { if (!seen) exit 1 }
+' "${RUST_ASM}"
+echo "======== +++ ======="
+
+for i in {1..500}; do
   cargo_run "${THREAD_REPR}" 
 done
-
-
