@@ -1327,8 +1327,9 @@ unsafe fn test_svld1ro_f32() {
         println!("Skipping test_svld1ro_f32 due to SVE vector length");
         return;
     }
+    let ptr = F32_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1ro_f32(svptrue_b32(), F32_DATA.as_ptr());
+    let loaded = svld1ro_f32(svptrue_b32(), ptr);
     assert_vector_matches_f32(
         loaded,
         svtrn1q_f32(
@@ -1343,8 +1344,9 @@ unsafe fn test_svld1ro_f64() {
         println!("Skipping test_svld1ro_f64 due to SVE vector length");
         return;
     }
+    let ptr = F64_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1ro_f64(svptrue_b64(), F64_DATA.as_ptr());
+    let loaded = svld1ro_f64(svptrue_b64(), ptr);
     assert_vector_matches_f64(
         loaded,
         svtrn1q_f64(
@@ -1359,8 +1361,9 @@ unsafe fn test_svld1ro_s8() {
         println!("Skipping test_svld1ro_s8 due to SVE vector length");
         return;
     }
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1ro_s8(svptrue_b8(), I8_DATA.as_ptr());
+    let loaded = svld1ro_s8(svptrue_b8(), ptr);
     assert_vector_matches_i8(
         loaded,
         svtrn1q_s8(
@@ -1409,8 +1412,9 @@ unsafe fn test_svld1ro_s16() {
         println!("Skipping test_svld1ro_s16 due to SVE vector length");
         return;
     }
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1ro_s16(svptrue_b16(), I16_DATA.as_ptr());
+    let loaded = svld1ro_s16(svptrue_b16(), ptr);
     assert_vector_matches_i16(
         loaded,
         svtrn1q_s16(
@@ -1443,8 +1447,9 @@ unsafe fn test_svld1ro_s32() {
         println!("Skipping test_svld1ro_s32 due to SVE vector length");
         return;
     }
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1ro_s32(svptrue_b32(), I32_DATA.as_ptr());
+    let loaded = svld1ro_s32(svptrue_b32(), ptr);
     assert_vector_matches_i32(
         loaded,
         svtrn1q_s32(
@@ -1459,8 +1464,9 @@ unsafe fn test_svld1ro_s64() {
         println!("Skipping test_svld1ro_s64 due to SVE vector length");
         return;
     }
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1ro_s64(svptrue_b64(), I64_DATA.as_ptr());
+    let loaded = svld1ro_s64(svptrue_b64(), ptr);
     assert_vector_matches_i64(
         loaded,
         svtrn1q_s64(
@@ -1475,8 +1481,9 @@ unsafe fn test_svld1ro_u8() {
         println!("Skipping test_svld1ro_u8 due to SVE vector length");
         return;
     }
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1ro_u8(svptrue_b8(), U8_DATA.as_ptr());
+    let loaded = svld1ro_u8(svptrue_b8(), ptr);
     assert_vector_matches_u8(
         loaded,
         svtrn1q_u8(
@@ -1525,8 +1532,9 @@ unsafe fn test_svld1ro_u16() {
         println!("Skipping test_svld1ro_u16 due to SVE vector length");
         return;
     }
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1ro_u16(svptrue_b16(), U16_DATA.as_ptr());
+    let loaded = svld1ro_u16(svptrue_b16(), ptr);
     assert_vector_matches_u16(
         loaded,
         svtrn1q_u16(
@@ -1559,8 +1567,9 @@ unsafe fn test_svld1ro_u32() {
         println!("Skipping test_svld1ro_u32 due to SVE vector length");
         return;
     }
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1ro_u32(svptrue_b32(), U32_DATA.as_ptr());
+    let loaded = svld1ro_u32(svptrue_b32(), ptr);
     assert_vector_matches_u32(
         loaded,
         svtrn1q_u32(
@@ -1575,8 +1584,9 @@ unsafe fn test_svld1ro_u64() {
         println!("Skipping test_svld1ro_u64 due to SVE vector length");
         return;
     }
+    let ptr = U64_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1ro_u64(svptrue_b64(), U64_DATA.as_ptr());
+    let loaded = svld1ro_u64(svptrue_b64(), ptr);
     assert_vector_matches_u64(
         loaded,
         svtrn1q_u64(
@@ -1587,8 +1597,9 @@ unsafe fn test_svld1ro_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svld1rq_f32() {
+    let ptr = F32_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1rq_f32(svptrue_b32(), F32_DATA.as_ptr());
+    let loaded = svld1rq_f32(svptrue_b32(), ptr);
     assert_vector_matches_f32(
         loaded,
         svdupq_n_f32(0usize as f32, 1usize as f32, 2usize as f32, 3usize as f32),
@@ -1596,14 +1607,16 @@ unsafe fn test_svld1rq_f32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svld1rq_f64() {
+    let ptr = F64_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1rq_f64(svptrue_b64(), F64_DATA.as_ptr());
+    let loaded = svld1rq_f64(svptrue_b64(), ptr);
     assert_vector_matches_f64(loaded, svdupq_n_f64(0usize as f64, 1usize as f64));
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svld1rq_s8() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1rq_s8(svptrue_b8(), I8_DATA.as_ptr());
+    let loaded = svld1rq_s8(svptrue_b8(), ptr);
     assert_vector_matches_i8(
         loaded,
         svdupq_n_s8(
@@ -1628,8 +1641,9 @@ unsafe fn test_svld1rq_s8() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svld1rq_s16() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1rq_s16(svptrue_b16(), I16_DATA.as_ptr());
+    let loaded = svld1rq_s16(svptrue_b16(), ptr);
     assert_vector_matches_i16(
         loaded,
         svdupq_n_s16(
@@ -1646,8 +1660,9 @@ unsafe fn test_svld1rq_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svld1rq_s32() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1rq_s32(svptrue_b32(), I32_DATA.as_ptr());
+    let loaded = svld1rq_s32(svptrue_b32(), ptr);
     assert_vector_matches_i32(
         loaded,
         svdupq_n_s32(0usize as i32, 1usize as i32, 2usize as i32, 3usize as i32),
@@ -1655,14 +1670,16 @@ unsafe fn test_svld1rq_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svld1rq_s64() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1rq_s64(svptrue_b64(), I64_DATA.as_ptr());
+    let loaded = svld1rq_s64(svptrue_b64(), ptr);
     assert_vector_matches_i64(loaded, svdupq_n_s64(0usize as i64, 1usize as i64));
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svld1rq_u8() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1rq_u8(svptrue_b8(), U8_DATA.as_ptr());
+    let loaded = svld1rq_u8(svptrue_b8(), ptr);
     assert_vector_matches_u8(
         loaded,
         svdupq_n_u8(
@@ -1687,8 +1704,9 @@ unsafe fn test_svld1rq_u8() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svld1rq_u16() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1rq_u16(svptrue_b16(), U16_DATA.as_ptr());
+    let loaded = svld1rq_u16(svptrue_b16(), ptr);
     assert_vector_matches_u16(
         loaded,
         svdupq_n_u16(
@@ -1705,8 +1723,9 @@ unsafe fn test_svld1rq_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svld1rq_u32() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1rq_u32(svptrue_b32(), U32_DATA.as_ptr());
+    let loaded = svld1rq_u32(svptrue_b32(), ptr);
     assert_vector_matches_u32(
         loaded,
         svdupq_n_u32(0usize as u32, 1usize as u32, 2usize as u32, 3usize as u32),
@@ -1714,8 +1733,9 @@ unsafe fn test_svld1rq_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svld1rq_u64() {
+    let ptr = U64_DATA.as_ptr();
     svsetffr();
-    let loaded = svld1rq_u64(svptrue_b64(), U64_DATA.as_ptr());
+    let loaded = svld1rq_u64(svptrue_b64(), ptr);
     assert_vector_matches_u64(loaded, svdupq_n_u64(0usize as u64, 1usize as u64));
 }
 #[simd_test(enable = "sve")]
@@ -6962,9 +6982,10 @@ unsafe fn test_svld4_vnum_u64_with_svst4_vnum_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_f32() {
+    let ptr = F32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_f32(svptrue_b32(), F32_DATA.as_ptr());
-    let loaded = svldff1_f32(svptrue_b32(), F32_DATA.as_ptr());
+    let _ = svld1_f32(svptrue_b32(), ptr);
+    let loaded = svldff1_f32(svptrue_b32(), ptr);
     assert_vector_matches_f32(
         loaded,
         svcvt_f32_s32_x(
@@ -6975,9 +6996,10 @@ unsafe fn test_svldff1_f32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_f64() {
+    let ptr = F64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_f64(svptrue_b64(), F64_DATA.as_ptr());
-    let loaded = svldff1_f64(svptrue_b64(), F64_DATA.as_ptr());
+    let _ = svld1_f64(svptrue_b64(), ptr);
+    let loaded = svldff1_f64(svptrue_b64(), ptr);
     assert_vector_matches_f64(
         loaded,
         svcvt_f64_s64_x(
@@ -6988,9 +7010,10 @@ unsafe fn test_svldff1_f64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_s8() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_s8(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldff1_s8(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1_s8(svptrue_b8(), ptr);
+    let loaded = svldff1_s8(svptrue_b8(), ptr);
     assert_vector_matches_i8(
         loaded,
         svindex_s8((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -6998,9 +7021,10 @@ unsafe fn test_svldff1_s8() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_s16() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_s16(svptrue_b16(), I16_DATA.as_ptr());
-    let loaded = svldff1_s16(svptrue_b16(), I16_DATA.as_ptr());
+    let _ = svld1_s16(svptrue_b16(), ptr);
+    let loaded = svldff1_s16(svptrue_b16(), ptr);
     assert_vector_matches_i16(
         loaded,
         svindex_s16((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7008,9 +7032,10 @@ unsafe fn test_svldff1_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_s32() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_s32(svptrue_b32(), I32_DATA.as_ptr());
-    let loaded = svldff1_s32(svptrue_b32(), I32_DATA.as_ptr());
+    let _ = svld1_s32(svptrue_b32(), ptr);
+    let loaded = svldff1_s32(svptrue_b32(), ptr);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7018,9 +7043,10 @@ unsafe fn test_svldff1_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_s64() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_s64(svptrue_b64(), I64_DATA.as_ptr());
-    let loaded = svldff1_s64(svptrue_b64(), I64_DATA.as_ptr());
+    let _ = svld1_s64(svptrue_b64(), ptr);
+    let loaded = svldff1_s64(svptrue_b64(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7028,9 +7054,10 @@ unsafe fn test_svldff1_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_u8() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_u8(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldff1_u8(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1_u8(svptrue_b8(), ptr);
+    let loaded = svldff1_u8(svptrue_b8(), ptr);
     assert_vector_matches_u8(
         loaded,
         svindex_u8((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7038,9 +7065,10 @@ unsafe fn test_svldff1_u8() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_u16() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_u16(svptrue_b16(), U16_DATA.as_ptr());
-    let loaded = svldff1_u16(svptrue_b16(), U16_DATA.as_ptr());
+    let _ = svld1_u16(svptrue_b16(), ptr);
+    let loaded = svldff1_u16(svptrue_b16(), ptr);
     assert_vector_matches_u16(
         loaded,
         svindex_u16((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7048,9 +7076,10 @@ unsafe fn test_svldff1_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_u32() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_u32(svptrue_b32(), U32_DATA.as_ptr());
-    let loaded = svldff1_u32(svptrue_b32(), U32_DATA.as_ptr());
+    let _ = svld1_u32(svptrue_b32(), ptr);
+    let loaded = svldff1_u32(svptrue_b32(), ptr);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7058,9 +7087,10 @@ unsafe fn test_svldff1_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_u64() {
+    let ptr = U64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_u64(svptrue_b64(), U64_DATA.as_ptr());
-    let loaded = svldff1_u64(svptrue_b64(), U64_DATA.as_ptr());
+    let _ = svld1_u64(svptrue_b64(), ptr);
+    let loaded = svldff1_u64(svptrue_b64(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7069,9 +7099,10 @@ unsafe fn test_svldff1_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_s32index_f32() {
     let indices = svindex_s32(0, 1);
+    let ptr = F32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_s32index_f32(svptrue_b32(), F32_DATA.as_ptr(), indices);
-    let loaded = svldff1_gather_s32index_f32(svptrue_b32(), F32_DATA.as_ptr(), indices);
+    let _ = svld1_gather_s32index_f32(svptrue_b32(), ptr, indices);
+    let loaded = svldff1_gather_s32index_f32(svptrue_b32(), ptr, indices);
     assert_vector_matches_f32(
         loaded,
         svcvt_f32_s32_x(
@@ -7083,9 +7114,10 @@ unsafe fn test_svldff1_gather_s32index_f32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_s32index_s32() {
     let indices = svindex_s32(0, 1);
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_s32index_s32(svptrue_b32(), I32_DATA.as_ptr(), indices);
-    let loaded = svldff1_gather_s32index_s32(svptrue_b32(), I32_DATA.as_ptr(), indices);
+    let _ = svld1_gather_s32index_s32(svptrue_b32(), ptr, indices);
+    let loaded = svldff1_gather_s32index_s32(svptrue_b32(), ptr, indices);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7094,9 +7126,10 @@ unsafe fn test_svldff1_gather_s32index_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_s32index_u32() {
     let indices = svindex_s32(0, 1);
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_s32index_u32(svptrue_b32(), U32_DATA.as_ptr(), indices);
-    let loaded = svldff1_gather_s32index_u32(svptrue_b32(), U32_DATA.as_ptr(), indices);
+    let _ = svld1_gather_s32index_u32(svptrue_b32(), ptr, indices);
+    let loaded = svldff1_gather_s32index_u32(svptrue_b32(), ptr, indices);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7105,9 +7138,10 @@ unsafe fn test_svldff1_gather_s32index_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_s64index_f64() {
     let indices = svindex_s64(0, 1);
+    let ptr = F64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_s64index_f64(svptrue_b64(), F64_DATA.as_ptr(), indices);
-    let loaded = svldff1_gather_s64index_f64(svptrue_b64(), F64_DATA.as_ptr(), indices);
+    let _ = svld1_gather_s64index_f64(svptrue_b64(), ptr, indices);
+    let loaded = svldff1_gather_s64index_f64(svptrue_b64(), ptr, indices);
     assert_vector_matches_f64(
         loaded,
         svcvt_f64_s64_x(
@@ -7119,9 +7153,10 @@ unsafe fn test_svldff1_gather_s64index_f64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_s64index_s64() {
     let indices = svindex_s64(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_s64index_s64(svptrue_b64(), I64_DATA.as_ptr(), indices);
-    let loaded = svldff1_gather_s64index_s64(svptrue_b64(), I64_DATA.as_ptr(), indices);
+    let _ = svld1_gather_s64index_s64(svptrue_b64(), ptr, indices);
+    let loaded = svldff1_gather_s64index_s64(svptrue_b64(), ptr, indices);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7130,9 +7165,10 @@ unsafe fn test_svldff1_gather_s64index_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_s64index_u64() {
     let indices = svindex_s64(0, 1);
+    let ptr = U64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_s64index_u64(svptrue_b64(), U64_DATA.as_ptr(), indices);
-    let loaded = svldff1_gather_s64index_u64(svptrue_b64(), U64_DATA.as_ptr(), indices);
+    let _ = svld1_gather_s64index_u64(svptrue_b64(), ptr, indices);
+    let loaded = svldff1_gather_s64index_u64(svptrue_b64(), ptr, indices);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7141,9 +7177,10 @@ unsafe fn test_svldff1_gather_s64index_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_u32index_f32() {
     let indices = svindex_u32(0, 1);
+    let ptr = F32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_u32index_f32(svptrue_b32(), F32_DATA.as_ptr(), indices);
-    let loaded = svldff1_gather_u32index_f32(svptrue_b32(), F32_DATA.as_ptr(), indices);
+    let _ = svld1_gather_u32index_f32(svptrue_b32(), ptr, indices);
+    let loaded = svldff1_gather_u32index_f32(svptrue_b32(), ptr, indices);
     assert_vector_matches_f32(
         loaded,
         svcvt_f32_s32_x(
@@ -7155,9 +7192,10 @@ unsafe fn test_svldff1_gather_u32index_f32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_u32index_s32() {
     let indices = svindex_u32(0, 1);
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_u32index_s32(svptrue_b32(), I32_DATA.as_ptr(), indices);
-    let loaded = svldff1_gather_u32index_s32(svptrue_b32(), I32_DATA.as_ptr(), indices);
+    let _ = svld1_gather_u32index_s32(svptrue_b32(), ptr, indices);
+    let loaded = svldff1_gather_u32index_s32(svptrue_b32(), ptr, indices);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7166,9 +7204,10 @@ unsafe fn test_svldff1_gather_u32index_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_u32index_u32() {
     let indices = svindex_u32(0, 1);
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_u32index_u32(svptrue_b32(), U32_DATA.as_ptr(), indices);
-    let loaded = svldff1_gather_u32index_u32(svptrue_b32(), U32_DATA.as_ptr(), indices);
+    let _ = svld1_gather_u32index_u32(svptrue_b32(), ptr, indices);
+    let loaded = svldff1_gather_u32index_u32(svptrue_b32(), ptr, indices);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7177,9 +7216,10 @@ unsafe fn test_svldff1_gather_u32index_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_u64index_f64() {
     let indices = svindex_u64(0, 1);
+    let ptr = F64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_u64index_f64(svptrue_b64(), F64_DATA.as_ptr(), indices);
-    let loaded = svldff1_gather_u64index_f64(svptrue_b64(), F64_DATA.as_ptr(), indices);
+    let _ = svld1_gather_u64index_f64(svptrue_b64(), ptr, indices);
+    let loaded = svldff1_gather_u64index_f64(svptrue_b64(), ptr, indices);
     assert_vector_matches_f64(
         loaded,
         svcvt_f64_s64_x(
@@ -7191,9 +7231,10 @@ unsafe fn test_svldff1_gather_u64index_f64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_u64index_s64() {
     let indices = svindex_u64(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_u64index_s64(svptrue_b64(), I64_DATA.as_ptr(), indices);
-    let loaded = svldff1_gather_u64index_s64(svptrue_b64(), I64_DATA.as_ptr(), indices);
+    let _ = svld1_gather_u64index_s64(svptrue_b64(), ptr, indices);
+    let loaded = svldff1_gather_u64index_s64(svptrue_b64(), ptr, indices);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7202,9 +7243,10 @@ unsafe fn test_svldff1_gather_u64index_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_u64index_u64() {
     let indices = svindex_u64(0, 1);
+    let ptr = U64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_u64index_u64(svptrue_b64(), U64_DATA.as_ptr(), indices);
-    let loaded = svldff1_gather_u64index_u64(svptrue_b64(), U64_DATA.as_ptr(), indices);
+    let _ = svld1_gather_u64index_u64(svptrue_b64(), ptr, indices);
+    let loaded = svldff1_gather_u64index_u64(svptrue_b64(), ptr, indices);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7213,9 +7255,10 @@ unsafe fn test_svldff1_gather_u64index_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_s32offset_f32() {
     let offsets = svindex_s32(0, 4u32.try_into().unwrap());
+    let ptr = F32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_s32offset_f32(svptrue_b32(), F32_DATA.as_ptr(), offsets);
-    let loaded = svldff1_gather_s32offset_f32(svptrue_b32(), F32_DATA.as_ptr(), offsets);
+    let _ = svld1_gather_s32offset_f32(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1_gather_s32offset_f32(svptrue_b32(), ptr, offsets);
     assert_vector_matches_f32(
         loaded,
         svcvt_f32_s32_x(
@@ -7227,9 +7270,10 @@ unsafe fn test_svldff1_gather_s32offset_f32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_s32offset_s32() {
     let offsets = svindex_s32(0, 4u32.try_into().unwrap());
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_s32offset_s32(svptrue_b32(), I32_DATA.as_ptr(), offsets);
-    let loaded = svldff1_gather_s32offset_s32(svptrue_b32(), I32_DATA.as_ptr(), offsets);
+    let _ = svld1_gather_s32offset_s32(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1_gather_s32offset_s32(svptrue_b32(), ptr, offsets);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7238,9 +7282,10 @@ unsafe fn test_svldff1_gather_s32offset_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_s32offset_u32() {
     let offsets = svindex_s32(0, 4u32.try_into().unwrap());
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_s32offset_u32(svptrue_b32(), U32_DATA.as_ptr(), offsets);
-    let loaded = svldff1_gather_s32offset_u32(svptrue_b32(), U32_DATA.as_ptr(), offsets);
+    let _ = svld1_gather_s32offset_u32(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1_gather_s32offset_u32(svptrue_b32(), ptr, offsets);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7249,9 +7294,10 @@ unsafe fn test_svldff1_gather_s32offset_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_s64offset_f64() {
     let offsets = svindex_s64(0, 8u32.try_into().unwrap());
+    let ptr = F64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_s64offset_f64(svptrue_b64(), F64_DATA.as_ptr(), offsets);
-    let loaded = svldff1_gather_s64offset_f64(svptrue_b64(), F64_DATA.as_ptr(), offsets);
+    let _ = svld1_gather_s64offset_f64(svptrue_b64(), ptr, offsets);
+    let loaded = svldff1_gather_s64offset_f64(svptrue_b64(), ptr, offsets);
     assert_vector_matches_f64(
         loaded,
         svcvt_f64_s64_x(
@@ -7263,9 +7309,10 @@ unsafe fn test_svldff1_gather_s64offset_f64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_s64offset_s64() {
     let offsets = svindex_s64(0, 8u32.try_into().unwrap());
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_s64offset_s64(svptrue_b64(), I64_DATA.as_ptr(), offsets);
-    let loaded = svldff1_gather_s64offset_s64(svptrue_b64(), I64_DATA.as_ptr(), offsets);
+    let _ = svld1_gather_s64offset_s64(svptrue_b64(), ptr, offsets);
+    let loaded = svldff1_gather_s64offset_s64(svptrue_b64(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7274,9 +7321,10 @@ unsafe fn test_svldff1_gather_s64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_s64offset_u64() {
     let offsets = svindex_s64(0, 8u32.try_into().unwrap());
+    let ptr = U64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_s64offset_u64(svptrue_b64(), U64_DATA.as_ptr(), offsets);
-    let loaded = svldff1_gather_s64offset_u64(svptrue_b64(), U64_DATA.as_ptr(), offsets);
+    let _ = svld1_gather_s64offset_u64(svptrue_b64(), ptr, offsets);
+    let loaded = svldff1_gather_s64offset_u64(svptrue_b64(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7285,9 +7333,10 @@ unsafe fn test_svldff1_gather_s64offset_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_u32offset_f32() {
     let offsets = svindex_u32(0, 4u32.try_into().unwrap());
+    let ptr = F32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_u32offset_f32(svptrue_b32(), F32_DATA.as_ptr(), offsets);
-    let loaded = svldff1_gather_u32offset_f32(svptrue_b32(), F32_DATA.as_ptr(), offsets);
+    let _ = svld1_gather_u32offset_f32(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1_gather_u32offset_f32(svptrue_b32(), ptr, offsets);
     assert_vector_matches_f32(
         loaded,
         svcvt_f32_s32_x(
@@ -7299,9 +7348,10 @@ unsafe fn test_svldff1_gather_u32offset_f32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_u32offset_s32() {
     let offsets = svindex_u32(0, 4u32.try_into().unwrap());
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_u32offset_s32(svptrue_b32(), I32_DATA.as_ptr(), offsets);
-    let loaded = svldff1_gather_u32offset_s32(svptrue_b32(), I32_DATA.as_ptr(), offsets);
+    let _ = svld1_gather_u32offset_s32(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1_gather_u32offset_s32(svptrue_b32(), ptr, offsets);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7310,9 +7360,10 @@ unsafe fn test_svldff1_gather_u32offset_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_u32offset_u32() {
     let offsets = svindex_u32(0, 4u32.try_into().unwrap());
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_u32offset_u32(svptrue_b32(), U32_DATA.as_ptr(), offsets);
-    let loaded = svldff1_gather_u32offset_u32(svptrue_b32(), U32_DATA.as_ptr(), offsets);
+    let _ = svld1_gather_u32offset_u32(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1_gather_u32offset_u32(svptrue_b32(), ptr, offsets);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7321,9 +7372,10 @@ unsafe fn test_svldff1_gather_u32offset_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_u64offset_f64() {
     let offsets = svindex_u64(0, 8u32.try_into().unwrap());
+    let ptr = F64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_u64offset_f64(svptrue_b64(), F64_DATA.as_ptr(), offsets);
-    let loaded = svldff1_gather_u64offset_f64(svptrue_b64(), F64_DATA.as_ptr(), offsets);
+    let _ = svld1_gather_u64offset_f64(svptrue_b64(), ptr, offsets);
+    let loaded = svldff1_gather_u64offset_f64(svptrue_b64(), ptr, offsets);
     assert_vector_matches_f64(
         loaded,
         svcvt_f64_s64_x(
@@ -7335,9 +7387,10 @@ unsafe fn test_svldff1_gather_u64offset_f64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_u64offset_s64() {
     let offsets = svindex_u64(0, 8u32.try_into().unwrap());
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_u64offset_s64(svptrue_b64(), I64_DATA.as_ptr(), offsets);
-    let loaded = svldff1_gather_u64offset_s64(svptrue_b64(), I64_DATA.as_ptr(), offsets);
+    let _ = svld1_gather_u64offset_s64(svptrue_b64(), ptr, offsets);
+    let loaded = svldff1_gather_u64offset_s64(svptrue_b64(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7346,9 +7399,10 @@ unsafe fn test_svldff1_gather_u64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_gather_u64offset_u64() {
     let offsets = svindex_u64(0, 8u32.try_into().unwrap());
+    let ptr = U64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_gather_u64offset_u64(svptrue_b64(), U64_DATA.as_ptr(), offsets);
-    let loaded = svldff1_gather_u64offset_u64(svptrue_b64(), U64_DATA.as_ptr(), offsets);
+    let _ = svld1_gather_u64offset_u64(svptrue_b64(), ptr, offsets);
+    let loaded = svldff1_gather_u64offset_u64(svptrue_b64(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7602,9 +7656,10 @@ unsafe fn test_svldff1_gather_u64base_offset_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_vnum_f32() {
+    let ptr = F32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_f32(svptrue_b32(), F32_DATA.as_ptr(), 1);
-    let loaded = svldff1_vnum_f32(svptrue_b32(), F32_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_f32(svptrue_b32(), ptr, 1);
+    let loaded = svldff1_vnum_f32(svptrue_b32(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_f32(
         loaded,
@@ -7619,9 +7674,10 @@ unsafe fn test_svldff1_vnum_f32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_vnum_f64() {
+    let ptr = F64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_f64(svptrue_b64(), F64_DATA.as_ptr(), 1);
-    let loaded = svldff1_vnum_f64(svptrue_b64(), F64_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_f64(svptrue_b64(), ptr, 1);
+    let loaded = svldff1_vnum_f64(svptrue_b64(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_f64(
         loaded,
@@ -7636,9 +7692,10 @@ unsafe fn test_svldff1_vnum_f64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_vnum_s8() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_s8(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldff1_vnum_s8(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_s8(svptrue_b8(), ptr, 1);
+    let loaded = svldff1_vnum_s8(svptrue_b8(), ptr, 1);
     let len = svcntb() as usize;
     assert_vector_matches_i8(
         loaded,
@@ -7650,9 +7707,10 @@ unsafe fn test_svldff1_vnum_s8() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_vnum_s16() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_s16(svptrue_b16(), I16_DATA.as_ptr(), 1);
-    let loaded = svldff1_vnum_s16(svptrue_b16(), I16_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_s16(svptrue_b16(), ptr, 1);
+    let loaded = svldff1_vnum_s16(svptrue_b16(), ptr, 1);
     let len = svcnth() as usize;
     assert_vector_matches_i16(
         loaded,
@@ -7664,9 +7722,10 @@ unsafe fn test_svldff1_vnum_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_vnum_s32() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_s32(svptrue_b32(), I32_DATA.as_ptr(), 1);
-    let loaded = svldff1_vnum_s32(svptrue_b32(), I32_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_s32(svptrue_b32(), ptr, 1);
+    let loaded = svldff1_vnum_s32(svptrue_b32(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_i32(
         loaded,
@@ -7678,9 +7737,10 @@ unsafe fn test_svldff1_vnum_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_vnum_s64() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_s64(svptrue_b64(), I64_DATA.as_ptr(), 1);
-    let loaded = svldff1_vnum_s64(svptrue_b64(), I64_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_s64(svptrue_b64(), ptr, 1);
+    let loaded = svldff1_vnum_s64(svptrue_b64(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -7692,9 +7752,10 @@ unsafe fn test_svldff1_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_vnum_u8() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_u8(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldff1_vnum_u8(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_u8(svptrue_b8(), ptr, 1);
+    let loaded = svldff1_vnum_u8(svptrue_b8(), ptr, 1);
     let len = svcntb() as usize;
     assert_vector_matches_u8(
         loaded,
@@ -7706,9 +7767,10 @@ unsafe fn test_svldff1_vnum_u8() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_vnum_u16() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_u16(svptrue_b16(), U16_DATA.as_ptr(), 1);
-    let loaded = svldff1_vnum_u16(svptrue_b16(), U16_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_u16(svptrue_b16(), ptr, 1);
+    let loaded = svldff1_vnum_u16(svptrue_b16(), ptr, 1);
     let len = svcnth() as usize;
     assert_vector_matches_u16(
         loaded,
@@ -7720,9 +7782,10 @@ unsafe fn test_svldff1_vnum_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_vnum_u32() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_u32(svptrue_b32(), U32_DATA.as_ptr(), 1);
-    let loaded = svldff1_vnum_u32(svptrue_b32(), U32_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_u32(svptrue_b32(), ptr, 1);
+    let loaded = svldff1_vnum_u32(svptrue_b32(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_u32(
         loaded,
@@ -7734,9 +7797,10 @@ unsafe fn test_svldff1_vnum_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1_vnum_u64() {
+    let ptr = U64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_u64(svptrue_b64(), U64_DATA.as_ptr(), 1);
-    let loaded = svldff1_vnum_u64(svptrue_b64(), U64_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_u64(svptrue_b64(), ptr, 1);
+    let loaded = svldff1_vnum_u64(svptrue_b64(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -7749,9 +7813,10 @@ unsafe fn test_svldff1_vnum_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_gather_s32offset_s32() {
     let offsets = svindex_s32(0, 1u32.try_into().unwrap());
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_gather_s32offset_s32(svptrue_b8(), I8_DATA.as_ptr(), offsets);
-    let loaded = svldff1sb_gather_s32offset_s32(svptrue_b8(), I8_DATA.as_ptr(), offsets);
+    let _ = svld1sb_gather_s32offset_s32(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1sb_gather_s32offset_s32(svptrue_b8(), ptr, offsets);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7760,9 +7825,10 @@ unsafe fn test_svldff1sb_gather_s32offset_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_s32offset_s32() {
     let offsets = svindex_s32(0, 2u32.try_into().unwrap());
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_s32offset_s32(svptrue_b16(), I16_DATA.as_ptr(), offsets);
-    let loaded = svldff1sh_gather_s32offset_s32(svptrue_b16(), I16_DATA.as_ptr(), offsets);
+    let _ = svld1sh_gather_s32offset_s32(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1sh_gather_s32offset_s32(svptrue_b16(), ptr, offsets);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7771,9 +7837,10 @@ unsafe fn test_svldff1sh_gather_s32offset_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_gather_s32offset_u32() {
     let offsets = svindex_s32(0, 1u32.try_into().unwrap());
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_gather_s32offset_u32(svptrue_b8(), I8_DATA.as_ptr(), offsets);
-    let loaded = svldff1sb_gather_s32offset_u32(svptrue_b8(), I8_DATA.as_ptr(), offsets);
+    let _ = svld1sb_gather_s32offset_u32(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1sb_gather_s32offset_u32(svptrue_b8(), ptr, offsets);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7782,9 +7849,10 @@ unsafe fn test_svldff1sb_gather_s32offset_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_s32offset_u32() {
     let offsets = svindex_s32(0, 2u32.try_into().unwrap());
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_s32offset_u32(svptrue_b16(), I16_DATA.as_ptr(), offsets);
-    let loaded = svldff1sh_gather_s32offset_u32(svptrue_b16(), I16_DATA.as_ptr(), offsets);
+    let _ = svld1sh_gather_s32offset_u32(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1sh_gather_s32offset_u32(svptrue_b16(), ptr, offsets);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7793,9 +7861,10 @@ unsafe fn test_svldff1sh_gather_s32offset_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_gather_s64offset_s64() {
     let offsets = svindex_s64(0, 1u32.try_into().unwrap());
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_gather_s64offset_s64(svptrue_b8(), I8_DATA.as_ptr(), offsets);
-    let loaded = svldff1sb_gather_s64offset_s64(svptrue_b8(), I8_DATA.as_ptr(), offsets);
+    let _ = svld1sb_gather_s64offset_s64(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1sb_gather_s64offset_s64(svptrue_b8(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7804,9 +7873,10 @@ unsafe fn test_svldff1sb_gather_s64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_s64offset_s64() {
     let offsets = svindex_s64(0, 2u32.try_into().unwrap());
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_s64offset_s64(svptrue_b16(), I16_DATA.as_ptr(), offsets);
-    let loaded = svldff1sh_gather_s64offset_s64(svptrue_b16(), I16_DATA.as_ptr(), offsets);
+    let _ = svld1sh_gather_s64offset_s64(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1sh_gather_s64offset_s64(svptrue_b16(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7815,9 +7885,10 @@ unsafe fn test_svldff1sh_gather_s64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sw_gather_s64offset_s64() {
     let offsets = svindex_s64(0, 4u32.try_into().unwrap());
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_gather_s64offset_s64(svptrue_b32(), I32_DATA.as_ptr(), offsets);
-    let loaded = svldff1sw_gather_s64offset_s64(svptrue_b32(), I32_DATA.as_ptr(), offsets);
+    let _ = svld1sw_gather_s64offset_s64(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1sw_gather_s64offset_s64(svptrue_b32(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7826,9 +7897,10 @@ unsafe fn test_svldff1sw_gather_s64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_gather_s64offset_u64() {
     let offsets = svindex_s64(0, 1u32.try_into().unwrap());
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_gather_s64offset_u64(svptrue_b8(), I8_DATA.as_ptr(), offsets);
-    let loaded = svldff1sb_gather_s64offset_u64(svptrue_b8(), I8_DATA.as_ptr(), offsets);
+    let _ = svld1sb_gather_s64offset_u64(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1sb_gather_s64offset_u64(svptrue_b8(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7837,9 +7909,10 @@ unsafe fn test_svldff1sb_gather_s64offset_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_s64offset_u64() {
     let offsets = svindex_s64(0, 2u32.try_into().unwrap());
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_s64offset_u64(svptrue_b16(), I16_DATA.as_ptr(), offsets);
-    let loaded = svldff1sh_gather_s64offset_u64(svptrue_b16(), I16_DATA.as_ptr(), offsets);
+    let _ = svld1sh_gather_s64offset_u64(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1sh_gather_s64offset_u64(svptrue_b16(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7848,9 +7921,10 @@ unsafe fn test_svldff1sh_gather_s64offset_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sw_gather_s64offset_u64() {
     let offsets = svindex_s64(0, 4u32.try_into().unwrap());
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_gather_s64offset_u64(svptrue_b32(), I32_DATA.as_ptr(), offsets);
-    let loaded = svldff1sw_gather_s64offset_u64(svptrue_b32(), I32_DATA.as_ptr(), offsets);
+    let _ = svld1sw_gather_s64offset_u64(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1sw_gather_s64offset_u64(svptrue_b32(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7859,9 +7933,10 @@ unsafe fn test_svldff1sw_gather_s64offset_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_gather_u32offset_s32() {
     let offsets = svindex_u32(0, 1u32.try_into().unwrap());
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_gather_u32offset_s32(svptrue_b8(), I8_DATA.as_ptr(), offsets);
-    let loaded = svldff1sb_gather_u32offset_s32(svptrue_b8(), I8_DATA.as_ptr(), offsets);
+    let _ = svld1sb_gather_u32offset_s32(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1sb_gather_u32offset_s32(svptrue_b8(), ptr, offsets);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7870,9 +7945,10 @@ unsafe fn test_svldff1sb_gather_u32offset_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_u32offset_s32() {
     let offsets = svindex_u32(0, 2u32.try_into().unwrap());
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_u32offset_s32(svptrue_b16(), I16_DATA.as_ptr(), offsets);
-    let loaded = svldff1sh_gather_u32offset_s32(svptrue_b16(), I16_DATA.as_ptr(), offsets);
+    let _ = svld1sh_gather_u32offset_s32(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1sh_gather_u32offset_s32(svptrue_b16(), ptr, offsets);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7881,9 +7957,10 @@ unsafe fn test_svldff1sh_gather_u32offset_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_gather_u32offset_u32() {
     let offsets = svindex_u32(0, 1u32.try_into().unwrap());
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_gather_u32offset_u32(svptrue_b8(), I8_DATA.as_ptr(), offsets);
-    let loaded = svldff1sb_gather_u32offset_u32(svptrue_b8(), I8_DATA.as_ptr(), offsets);
+    let _ = svld1sb_gather_u32offset_u32(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1sb_gather_u32offset_u32(svptrue_b8(), ptr, offsets);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7892,9 +7969,10 @@ unsafe fn test_svldff1sb_gather_u32offset_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_u32offset_u32() {
     let offsets = svindex_u32(0, 2u32.try_into().unwrap());
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_u32offset_u32(svptrue_b16(), I16_DATA.as_ptr(), offsets);
-    let loaded = svldff1sh_gather_u32offset_u32(svptrue_b16(), I16_DATA.as_ptr(), offsets);
+    let _ = svld1sh_gather_u32offset_u32(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1sh_gather_u32offset_u32(svptrue_b16(), ptr, offsets);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7903,9 +7981,10 @@ unsafe fn test_svldff1sh_gather_u32offset_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_gather_u64offset_s64() {
     let offsets = svindex_u64(0, 1u32.try_into().unwrap());
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_gather_u64offset_s64(svptrue_b8(), I8_DATA.as_ptr(), offsets);
-    let loaded = svldff1sb_gather_u64offset_s64(svptrue_b8(), I8_DATA.as_ptr(), offsets);
+    let _ = svld1sb_gather_u64offset_s64(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1sb_gather_u64offset_s64(svptrue_b8(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7914,9 +7993,10 @@ unsafe fn test_svldff1sb_gather_u64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_u64offset_s64() {
     let offsets = svindex_u64(0, 2u32.try_into().unwrap());
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_u64offset_s64(svptrue_b16(), I16_DATA.as_ptr(), offsets);
-    let loaded = svldff1sh_gather_u64offset_s64(svptrue_b16(), I16_DATA.as_ptr(), offsets);
+    let _ = svld1sh_gather_u64offset_s64(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1sh_gather_u64offset_s64(svptrue_b16(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7925,9 +8005,10 @@ unsafe fn test_svldff1sh_gather_u64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sw_gather_u64offset_s64() {
     let offsets = svindex_u64(0, 4u32.try_into().unwrap());
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_gather_u64offset_s64(svptrue_b32(), I32_DATA.as_ptr(), offsets);
-    let loaded = svldff1sw_gather_u64offset_s64(svptrue_b32(), I32_DATA.as_ptr(), offsets);
+    let _ = svld1sw_gather_u64offset_s64(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1sw_gather_u64offset_s64(svptrue_b32(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7936,9 +8017,10 @@ unsafe fn test_svldff1sw_gather_u64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_gather_u64offset_u64() {
     let offsets = svindex_u64(0, 1u32.try_into().unwrap());
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_gather_u64offset_u64(svptrue_b8(), I8_DATA.as_ptr(), offsets);
-    let loaded = svldff1sb_gather_u64offset_u64(svptrue_b8(), I8_DATA.as_ptr(), offsets);
+    let _ = svld1sb_gather_u64offset_u64(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1sb_gather_u64offset_u64(svptrue_b8(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7947,9 +8029,10 @@ unsafe fn test_svldff1sb_gather_u64offset_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_u64offset_u64() {
     let offsets = svindex_u64(0, 2u32.try_into().unwrap());
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_u64offset_u64(svptrue_b16(), I16_DATA.as_ptr(), offsets);
-    let loaded = svldff1sh_gather_u64offset_u64(svptrue_b16(), I16_DATA.as_ptr(), offsets);
+    let _ = svld1sh_gather_u64offset_u64(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1sh_gather_u64offset_u64(svptrue_b16(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -7958,9 +8041,10 @@ unsafe fn test_svldff1sh_gather_u64offset_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sw_gather_u64offset_u64() {
     let offsets = svindex_u64(0, 4u32.try_into().unwrap());
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_gather_u64offset_u64(svptrue_b32(), I32_DATA.as_ptr(), offsets);
-    let loaded = svldff1sw_gather_u64offset_u64(svptrue_b32(), I32_DATA.as_ptr(), offsets);
+    let _ = svld1sw_gather_u64offset_u64(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1sw_gather_u64offset_u64(svptrue_b32(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8204,9 +8288,10 @@ unsafe fn test_svldff1sw_gather_u64base_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_s16() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_s16(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldff1sb_s16(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1sb_s16(svptrue_b8(), ptr);
+    let loaded = svldff1sb_s16(svptrue_b8(), ptr);
     assert_vector_matches_i16(
         loaded,
         svindex_s16((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8214,9 +8299,10 @@ unsafe fn test_svldff1sb_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_s32() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_s32(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldff1sb_s32(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1sb_s32(svptrue_b8(), ptr);
+    let loaded = svldff1sb_s32(svptrue_b8(), ptr);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8224,9 +8310,10 @@ unsafe fn test_svldff1sb_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_s32() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_s32(svptrue_b16(), I16_DATA.as_ptr());
-    let loaded = svldff1sh_s32(svptrue_b16(), I16_DATA.as_ptr());
+    let _ = svld1sh_s32(svptrue_b16(), ptr);
+    let loaded = svldff1sh_s32(svptrue_b16(), ptr);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8234,9 +8321,10 @@ unsafe fn test_svldff1sh_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_s64() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_s64(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldff1sb_s64(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1sb_s64(svptrue_b8(), ptr);
+    let loaded = svldff1sb_s64(svptrue_b8(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8244,9 +8332,10 @@ unsafe fn test_svldff1sb_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_s64() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_s64(svptrue_b16(), I16_DATA.as_ptr());
-    let loaded = svldff1sh_s64(svptrue_b16(), I16_DATA.as_ptr());
+    let _ = svld1sh_s64(svptrue_b16(), ptr);
+    let loaded = svldff1sh_s64(svptrue_b16(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8254,9 +8343,10 @@ unsafe fn test_svldff1sh_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sw_s64() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_s64(svptrue_b32(), I32_DATA.as_ptr());
-    let loaded = svldff1sw_s64(svptrue_b32(), I32_DATA.as_ptr());
+    let _ = svld1sw_s64(svptrue_b32(), ptr);
+    let loaded = svldff1sw_s64(svptrue_b32(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8264,9 +8354,10 @@ unsafe fn test_svldff1sw_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_u16() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_u16(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldff1sb_u16(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1sb_u16(svptrue_b8(), ptr);
+    let loaded = svldff1sb_u16(svptrue_b8(), ptr);
     assert_vector_matches_u16(
         loaded,
         svindex_u16((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8274,9 +8365,10 @@ unsafe fn test_svldff1sb_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_u32() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_u32(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldff1sb_u32(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1sb_u32(svptrue_b8(), ptr);
+    let loaded = svldff1sb_u32(svptrue_b8(), ptr);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8284,9 +8376,10 @@ unsafe fn test_svldff1sb_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_u32() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_u32(svptrue_b16(), I16_DATA.as_ptr());
-    let loaded = svldff1sh_u32(svptrue_b16(), I16_DATA.as_ptr());
+    let _ = svld1sh_u32(svptrue_b16(), ptr);
+    let loaded = svldff1sh_u32(svptrue_b16(), ptr);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8294,9 +8387,10 @@ unsafe fn test_svldff1sh_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_u64() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_u64(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldff1sb_u64(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1sb_u64(svptrue_b8(), ptr);
+    let loaded = svldff1sb_u64(svptrue_b8(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8304,9 +8398,10 @@ unsafe fn test_svldff1sb_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_u64() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_u64(svptrue_b16(), I16_DATA.as_ptr());
-    let loaded = svldff1sh_u64(svptrue_b16(), I16_DATA.as_ptr());
+    let _ = svld1sh_u64(svptrue_b16(), ptr);
+    let loaded = svldff1sh_u64(svptrue_b16(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8314,9 +8409,10 @@ unsafe fn test_svldff1sh_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sw_u64() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_u64(svptrue_b32(), I32_DATA.as_ptr());
-    let loaded = svldff1sw_u64(svptrue_b32(), I32_DATA.as_ptr());
+    let _ = svld1sw_u64(svptrue_b32(), ptr);
+    let loaded = svldff1sw_u64(svptrue_b32(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8324,9 +8420,10 @@ unsafe fn test_svldff1sw_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_vnum_s16() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_vnum_s16(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldff1sb_vnum_s16(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1sb_vnum_s16(svptrue_b8(), ptr, 1);
+    let loaded = svldff1sb_vnum_s16(svptrue_b8(), ptr, 1);
     let len = svcnth() as usize;
     assert_vector_matches_i16(
         loaded,
@@ -8338,9 +8435,10 @@ unsafe fn test_svldff1sb_vnum_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_vnum_s32() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_vnum_s32(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldff1sb_vnum_s32(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1sb_vnum_s32(svptrue_b8(), ptr, 1);
+    let loaded = svldff1sb_vnum_s32(svptrue_b8(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_i32(
         loaded,
@@ -8352,9 +8450,10 @@ unsafe fn test_svldff1sb_vnum_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_vnum_s32() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_vnum_s32(svptrue_b16(), I16_DATA.as_ptr(), 1);
-    let loaded = svldff1sh_vnum_s32(svptrue_b16(), I16_DATA.as_ptr(), 1);
+    let _ = svld1sh_vnum_s32(svptrue_b16(), ptr, 1);
+    let loaded = svldff1sh_vnum_s32(svptrue_b16(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_i32(
         loaded,
@@ -8366,9 +8465,10 @@ unsafe fn test_svldff1sh_vnum_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_vnum_s64() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_vnum_s64(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldff1sb_vnum_s64(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1sb_vnum_s64(svptrue_b8(), ptr, 1);
+    let loaded = svldff1sb_vnum_s64(svptrue_b8(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -8380,9 +8480,10 @@ unsafe fn test_svldff1sb_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_vnum_s64() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_vnum_s64(svptrue_b16(), I16_DATA.as_ptr(), 1);
-    let loaded = svldff1sh_vnum_s64(svptrue_b16(), I16_DATA.as_ptr(), 1);
+    let _ = svld1sh_vnum_s64(svptrue_b16(), ptr, 1);
+    let loaded = svldff1sh_vnum_s64(svptrue_b16(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -8394,9 +8495,10 @@ unsafe fn test_svldff1sh_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sw_vnum_s64() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_vnum_s64(svptrue_b32(), I32_DATA.as_ptr(), 1);
-    let loaded = svldff1sw_vnum_s64(svptrue_b32(), I32_DATA.as_ptr(), 1);
+    let _ = svld1sw_vnum_s64(svptrue_b32(), ptr, 1);
+    let loaded = svldff1sw_vnum_s64(svptrue_b32(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -8408,9 +8510,10 @@ unsafe fn test_svldff1sw_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_vnum_u16() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_vnum_u16(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldff1sb_vnum_u16(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1sb_vnum_u16(svptrue_b8(), ptr, 1);
+    let loaded = svldff1sb_vnum_u16(svptrue_b8(), ptr, 1);
     let len = svcnth() as usize;
     assert_vector_matches_u16(
         loaded,
@@ -8422,9 +8525,10 @@ unsafe fn test_svldff1sb_vnum_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_vnum_u32() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_vnum_u32(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldff1sb_vnum_u32(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1sb_vnum_u32(svptrue_b8(), ptr, 1);
+    let loaded = svldff1sb_vnum_u32(svptrue_b8(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_u32(
         loaded,
@@ -8436,9 +8540,10 @@ unsafe fn test_svldff1sb_vnum_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_vnum_u32() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_vnum_u32(svptrue_b16(), I16_DATA.as_ptr(), 1);
-    let loaded = svldff1sh_vnum_u32(svptrue_b16(), I16_DATA.as_ptr(), 1);
+    let _ = svld1sh_vnum_u32(svptrue_b16(), ptr, 1);
+    let loaded = svldff1sh_vnum_u32(svptrue_b16(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_u32(
         loaded,
@@ -8450,9 +8555,10 @@ unsafe fn test_svldff1sh_vnum_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sb_vnum_u64() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_vnum_u64(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldff1sb_vnum_u64(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1sb_vnum_u64(svptrue_b8(), ptr, 1);
+    let loaded = svldff1sb_vnum_u64(svptrue_b8(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -8464,9 +8570,10 @@ unsafe fn test_svldff1sb_vnum_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_vnum_u64() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_vnum_u64(svptrue_b16(), I16_DATA.as_ptr(), 1);
-    let loaded = svldff1sh_vnum_u64(svptrue_b16(), I16_DATA.as_ptr(), 1);
+    let _ = svld1sh_vnum_u64(svptrue_b16(), ptr, 1);
+    let loaded = svldff1sh_vnum_u64(svptrue_b16(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -8478,9 +8585,10 @@ unsafe fn test_svldff1sh_vnum_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sw_vnum_u64() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_vnum_u64(svptrue_b32(), I32_DATA.as_ptr(), 1);
-    let loaded = svldff1sw_vnum_u64(svptrue_b32(), I32_DATA.as_ptr(), 1);
+    let _ = svld1sw_vnum_u64(svptrue_b32(), ptr, 1);
+    let loaded = svldff1sw_vnum_u64(svptrue_b32(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -8493,9 +8601,10 @@ unsafe fn test_svldff1sw_vnum_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_s32index_s32() {
     let indices = svindex_s32(0, 1);
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_s32index_s32(svptrue_b16(), I16_DATA.as_ptr(), indices);
-    let loaded = svldff1sh_gather_s32index_s32(svptrue_b16(), I16_DATA.as_ptr(), indices);
+    let _ = svld1sh_gather_s32index_s32(svptrue_b16(), ptr, indices);
+    let loaded = svldff1sh_gather_s32index_s32(svptrue_b16(), ptr, indices);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8504,9 +8613,10 @@ unsafe fn test_svldff1sh_gather_s32index_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_s32index_u32() {
     let indices = svindex_s32(0, 1);
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_s32index_u32(svptrue_b16(), I16_DATA.as_ptr(), indices);
-    let loaded = svldff1sh_gather_s32index_u32(svptrue_b16(), I16_DATA.as_ptr(), indices);
+    let _ = svld1sh_gather_s32index_u32(svptrue_b16(), ptr, indices);
+    let loaded = svldff1sh_gather_s32index_u32(svptrue_b16(), ptr, indices);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8515,9 +8625,10 @@ unsafe fn test_svldff1sh_gather_s32index_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_s64index_s64() {
     let indices = svindex_s64(0, 1);
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_s64index_s64(svptrue_b16(), I16_DATA.as_ptr(), indices);
-    let loaded = svldff1sh_gather_s64index_s64(svptrue_b16(), I16_DATA.as_ptr(), indices);
+    let _ = svld1sh_gather_s64index_s64(svptrue_b16(), ptr, indices);
+    let loaded = svldff1sh_gather_s64index_s64(svptrue_b16(), ptr, indices);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8526,9 +8637,10 @@ unsafe fn test_svldff1sh_gather_s64index_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sw_gather_s64index_s64() {
     let indices = svindex_s64(0, 1);
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_gather_s64index_s64(svptrue_b32(), I32_DATA.as_ptr(), indices);
-    let loaded = svldff1sw_gather_s64index_s64(svptrue_b32(), I32_DATA.as_ptr(), indices);
+    let _ = svld1sw_gather_s64index_s64(svptrue_b32(), ptr, indices);
+    let loaded = svldff1sw_gather_s64index_s64(svptrue_b32(), ptr, indices);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8537,9 +8649,10 @@ unsafe fn test_svldff1sw_gather_s64index_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_s64index_u64() {
     let indices = svindex_s64(0, 1);
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_s64index_u64(svptrue_b16(), I16_DATA.as_ptr(), indices);
-    let loaded = svldff1sh_gather_s64index_u64(svptrue_b16(), I16_DATA.as_ptr(), indices);
+    let _ = svld1sh_gather_s64index_u64(svptrue_b16(), ptr, indices);
+    let loaded = svldff1sh_gather_s64index_u64(svptrue_b16(), ptr, indices);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8548,9 +8661,10 @@ unsafe fn test_svldff1sh_gather_s64index_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sw_gather_s64index_u64() {
     let indices = svindex_s64(0, 1);
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_gather_s64index_u64(svptrue_b32(), I32_DATA.as_ptr(), indices);
-    let loaded = svldff1sw_gather_s64index_u64(svptrue_b32(), I32_DATA.as_ptr(), indices);
+    let _ = svld1sw_gather_s64index_u64(svptrue_b32(), ptr, indices);
+    let loaded = svldff1sw_gather_s64index_u64(svptrue_b32(), ptr, indices);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8559,9 +8673,10 @@ unsafe fn test_svldff1sw_gather_s64index_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_u32index_s32() {
     let indices = svindex_u32(0, 1);
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_u32index_s32(svptrue_b16(), I16_DATA.as_ptr(), indices);
-    let loaded = svldff1sh_gather_u32index_s32(svptrue_b16(), I16_DATA.as_ptr(), indices);
+    let _ = svld1sh_gather_u32index_s32(svptrue_b16(), ptr, indices);
+    let loaded = svldff1sh_gather_u32index_s32(svptrue_b16(), ptr, indices);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8570,9 +8685,10 @@ unsafe fn test_svldff1sh_gather_u32index_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_u32index_u32() {
     let indices = svindex_u32(0, 1);
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_u32index_u32(svptrue_b16(), I16_DATA.as_ptr(), indices);
-    let loaded = svldff1sh_gather_u32index_u32(svptrue_b16(), I16_DATA.as_ptr(), indices);
+    let _ = svld1sh_gather_u32index_u32(svptrue_b16(), ptr, indices);
+    let loaded = svldff1sh_gather_u32index_u32(svptrue_b16(), ptr, indices);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8581,9 +8697,10 @@ unsafe fn test_svldff1sh_gather_u32index_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_u64index_s64() {
     let indices = svindex_u64(0, 1);
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_u64index_s64(svptrue_b16(), I16_DATA.as_ptr(), indices);
-    let loaded = svldff1sh_gather_u64index_s64(svptrue_b16(), I16_DATA.as_ptr(), indices);
+    let _ = svld1sh_gather_u64index_s64(svptrue_b16(), ptr, indices);
+    let loaded = svldff1sh_gather_u64index_s64(svptrue_b16(), ptr, indices);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8592,9 +8709,10 @@ unsafe fn test_svldff1sh_gather_u64index_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sw_gather_u64index_s64() {
     let indices = svindex_u64(0, 1);
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_gather_u64index_s64(svptrue_b32(), I32_DATA.as_ptr(), indices);
-    let loaded = svldff1sw_gather_u64index_s64(svptrue_b32(), I32_DATA.as_ptr(), indices);
+    let _ = svld1sw_gather_u64index_s64(svptrue_b32(), ptr, indices);
+    let loaded = svldff1sw_gather_u64index_s64(svptrue_b32(), ptr, indices);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8603,9 +8721,10 @@ unsafe fn test_svldff1sw_gather_u64index_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sh_gather_u64index_u64() {
     let indices = svindex_u64(0, 1);
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_gather_u64index_u64(svptrue_b16(), I16_DATA.as_ptr(), indices);
-    let loaded = svldff1sh_gather_u64index_u64(svptrue_b16(), I16_DATA.as_ptr(), indices);
+    let _ = svld1sh_gather_u64index_u64(svptrue_b16(), ptr, indices);
+    let loaded = svldff1sh_gather_u64index_u64(svptrue_b16(), ptr, indices);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8614,9 +8733,10 @@ unsafe fn test_svldff1sh_gather_u64index_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1sw_gather_u64index_u64() {
     let indices = svindex_u64(0, 1);
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_gather_u64index_u64(svptrue_b32(), I32_DATA.as_ptr(), indices);
-    let loaded = svldff1sw_gather_u64index_u64(svptrue_b32(), I32_DATA.as_ptr(), indices);
+    let _ = svld1sw_gather_u64index_u64(svptrue_b32(), ptr, indices);
+    let loaded = svldff1sw_gather_u64index_u64(svptrue_b32(), ptr, indices);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8715,9 +8835,10 @@ unsafe fn test_svldff1sw_gather_u64base_index_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_gather_s32offset_s32() {
     let offsets = svindex_s32(0, 1u32.try_into().unwrap());
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_gather_s32offset_s32(svptrue_b8(), U8_DATA.as_ptr(), offsets);
-    let loaded = svldff1ub_gather_s32offset_s32(svptrue_b8(), U8_DATA.as_ptr(), offsets);
+    let _ = svld1ub_gather_s32offset_s32(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1ub_gather_s32offset_s32(svptrue_b8(), ptr, offsets);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8726,9 +8847,10 @@ unsafe fn test_svldff1ub_gather_s32offset_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_s32offset_s32() {
     let offsets = svindex_s32(0, 2u32.try_into().unwrap());
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_s32offset_s32(svptrue_b16(), U16_DATA.as_ptr(), offsets);
-    let loaded = svldff1uh_gather_s32offset_s32(svptrue_b16(), U16_DATA.as_ptr(), offsets);
+    let _ = svld1uh_gather_s32offset_s32(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1uh_gather_s32offset_s32(svptrue_b16(), ptr, offsets);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8737,9 +8859,10 @@ unsafe fn test_svldff1uh_gather_s32offset_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_gather_s32offset_u32() {
     let offsets = svindex_s32(0, 1u32.try_into().unwrap());
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_gather_s32offset_u32(svptrue_b8(), U8_DATA.as_ptr(), offsets);
-    let loaded = svldff1ub_gather_s32offset_u32(svptrue_b8(), U8_DATA.as_ptr(), offsets);
+    let _ = svld1ub_gather_s32offset_u32(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1ub_gather_s32offset_u32(svptrue_b8(), ptr, offsets);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8748,9 +8871,10 @@ unsafe fn test_svldff1ub_gather_s32offset_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_s32offset_u32() {
     let offsets = svindex_s32(0, 2u32.try_into().unwrap());
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_s32offset_u32(svptrue_b16(), U16_DATA.as_ptr(), offsets);
-    let loaded = svldff1uh_gather_s32offset_u32(svptrue_b16(), U16_DATA.as_ptr(), offsets);
+    let _ = svld1uh_gather_s32offset_u32(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1uh_gather_s32offset_u32(svptrue_b16(), ptr, offsets);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8759,9 +8883,10 @@ unsafe fn test_svldff1uh_gather_s32offset_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_gather_s64offset_s64() {
     let offsets = svindex_s64(0, 1u32.try_into().unwrap());
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_gather_s64offset_s64(svptrue_b8(), U8_DATA.as_ptr(), offsets);
-    let loaded = svldff1ub_gather_s64offset_s64(svptrue_b8(), U8_DATA.as_ptr(), offsets);
+    let _ = svld1ub_gather_s64offset_s64(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1ub_gather_s64offset_s64(svptrue_b8(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8770,9 +8895,10 @@ unsafe fn test_svldff1ub_gather_s64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_s64offset_s64() {
     let offsets = svindex_s64(0, 2u32.try_into().unwrap());
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_s64offset_s64(svptrue_b16(), U16_DATA.as_ptr(), offsets);
-    let loaded = svldff1uh_gather_s64offset_s64(svptrue_b16(), U16_DATA.as_ptr(), offsets);
+    let _ = svld1uh_gather_s64offset_s64(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1uh_gather_s64offset_s64(svptrue_b16(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8781,9 +8907,10 @@ unsafe fn test_svldff1uh_gather_s64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uw_gather_s64offset_s64() {
     let offsets = svindex_s64(0, 4u32.try_into().unwrap());
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_gather_s64offset_s64(svptrue_b32(), U32_DATA.as_ptr(), offsets);
-    let loaded = svldff1uw_gather_s64offset_s64(svptrue_b32(), U32_DATA.as_ptr(), offsets);
+    let _ = svld1uw_gather_s64offset_s64(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1uw_gather_s64offset_s64(svptrue_b32(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8792,9 +8919,10 @@ unsafe fn test_svldff1uw_gather_s64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_gather_s64offset_u64() {
     let offsets = svindex_s64(0, 1u32.try_into().unwrap());
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_gather_s64offset_u64(svptrue_b8(), U8_DATA.as_ptr(), offsets);
-    let loaded = svldff1ub_gather_s64offset_u64(svptrue_b8(), U8_DATA.as_ptr(), offsets);
+    let _ = svld1ub_gather_s64offset_u64(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1ub_gather_s64offset_u64(svptrue_b8(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8803,9 +8931,10 @@ unsafe fn test_svldff1ub_gather_s64offset_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_s64offset_u64() {
     let offsets = svindex_s64(0, 2u32.try_into().unwrap());
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_s64offset_u64(svptrue_b16(), U16_DATA.as_ptr(), offsets);
-    let loaded = svldff1uh_gather_s64offset_u64(svptrue_b16(), U16_DATA.as_ptr(), offsets);
+    let _ = svld1uh_gather_s64offset_u64(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1uh_gather_s64offset_u64(svptrue_b16(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8814,9 +8943,10 @@ unsafe fn test_svldff1uh_gather_s64offset_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uw_gather_s64offset_u64() {
     let offsets = svindex_s64(0, 4u32.try_into().unwrap());
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_gather_s64offset_u64(svptrue_b32(), U32_DATA.as_ptr(), offsets);
-    let loaded = svldff1uw_gather_s64offset_u64(svptrue_b32(), U32_DATA.as_ptr(), offsets);
+    let _ = svld1uw_gather_s64offset_u64(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1uw_gather_s64offset_u64(svptrue_b32(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8825,9 +8955,10 @@ unsafe fn test_svldff1uw_gather_s64offset_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_gather_u32offset_s32() {
     let offsets = svindex_u32(0, 1u32.try_into().unwrap());
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_gather_u32offset_s32(svptrue_b8(), U8_DATA.as_ptr(), offsets);
-    let loaded = svldff1ub_gather_u32offset_s32(svptrue_b8(), U8_DATA.as_ptr(), offsets);
+    let _ = svld1ub_gather_u32offset_s32(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1ub_gather_u32offset_s32(svptrue_b8(), ptr, offsets);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8836,9 +8967,10 @@ unsafe fn test_svldff1ub_gather_u32offset_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_u32offset_s32() {
     let offsets = svindex_u32(0, 2u32.try_into().unwrap());
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_u32offset_s32(svptrue_b16(), U16_DATA.as_ptr(), offsets);
-    let loaded = svldff1uh_gather_u32offset_s32(svptrue_b16(), U16_DATA.as_ptr(), offsets);
+    let _ = svld1uh_gather_u32offset_s32(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1uh_gather_u32offset_s32(svptrue_b16(), ptr, offsets);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8847,9 +8979,10 @@ unsafe fn test_svldff1uh_gather_u32offset_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_gather_u32offset_u32() {
     let offsets = svindex_u32(0, 1u32.try_into().unwrap());
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_gather_u32offset_u32(svptrue_b8(), U8_DATA.as_ptr(), offsets);
-    let loaded = svldff1ub_gather_u32offset_u32(svptrue_b8(), U8_DATA.as_ptr(), offsets);
+    let _ = svld1ub_gather_u32offset_u32(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1ub_gather_u32offset_u32(svptrue_b8(), ptr, offsets);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8858,9 +8991,10 @@ unsafe fn test_svldff1ub_gather_u32offset_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_u32offset_u32() {
     let offsets = svindex_u32(0, 2u32.try_into().unwrap());
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_u32offset_u32(svptrue_b16(), U16_DATA.as_ptr(), offsets);
-    let loaded = svldff1uh_gather_u32offset_u32(svptrue_b16(), U16_DATA.as_ptr(), offsets);
+    let _ = svld1uh_gather_u32offset_u32(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1uh_gather_u32offset_u32(svptrue_b16(), ptr, offsets);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8869,9 +9003,10 @@ unsafe fn test_svldff1uh_gather_u32offset_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_gather_u64offset_s64() {
     let offsets = svindex_u64(0, 1u32.try_into().unwrap());
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_gather_u64offset_s64(svptrue_b8(), U8_DATA.as_ptr(), offsets);
-    let loaded = svldff1ub_gather_u64offset_s64(svptrue_b8(), U8_DATA.as_ptr(), offsets);
+    let _ = svld1ub_gather_u64offset_s64(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1ub_gather_u64offset_s64(svptrue_b8(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8880,9 +9015,10 @@ unsafe fn test_svldff1ub_gather_u64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_u64offset_s64() {
     let offsets = svindex_u64(0, 2u32.try_into().unwrap());
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_u64offset_s64(svptrue_b16(), U16_DATA.as_ptr(), offsets);
-    let loaded = svldff1uh_gather_u64offset_s64(svptrue_b16(), U16_DATA.as_ptr(), offsets);
+    let _ = svld1uh_gather_u64offset_s64(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1uh_gather_u64offset_s64(svptrue_b16(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8891,9 +9027,10 @@ unsafe fn test_svldff1uh_gather_u64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uw_gather_u64offset_s64() {
     let offsets = svindex_u64(0, 4u32.try_into().unwrap());
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_gather_u64offset_s64(svptrue_b32(), U32_DATA.as_ptr(), offsets);
-    let loaded = svldff1uw_gather_u64offset_s64(svptrue_b32(), U32_DATA.as_ptr(), offsets);
+    let _ = svld1uw_gather_u64offset_s64(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1uw_gather_u64offset_s64(svptrue_b32(), ptr, offsets);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8902,9 +9039,10 @@ unsafe fn test_svldff1uw_gather_u64offset_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_gather_u64offset_u64() {
     let offsets = svindex_u64(0, 1u32.try_into().unwrap());
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_gather_u64offset_u64(svptrue_b8(), U8_DATA.as_ptr(), offsets);
-    let loaded = svldff1ub_gather_u64offset_u64(svptrue_b8(), U8_DATA.as_ptr(), offsets);
+    let _ = svld1ub_gather_u64offset_u64(svptrue_b8(), ptr, offsets);
+    let loaded = svldff1ub_gather_u64offset_u64(svptrue_b8(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8913,9 +9051,10 @@ unsafe fn test_svldff1ub_gather_u64offset_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_u64offset_u64() {
     let offsets = svindex_u64(0, 2u32.try_into().unwrap());
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_u64offset_u64(svptrue_b16(), U16_DATA.as_ptr(), offsets);
-    let loaded = svldff1uh_gather_u64offset_u64(svptrue_b16(), U16_DATA.as_ptr(), offsets);
+    let _ = svld1uh_gather_u64offset_u64(svptrue_b16(), ptr, offsets);
+    let loaded = svldff1uh_gather_u64offset_u64(svptrue_b16(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -8924,9 +9063,10 @@ unsafe fn test_svldff1uh_gather_u64offset_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uw_gather_u64offset_u64() {
     let offsets = svindex_u64(0, 4u32.try_into().unwrap());
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_gather_u64offset_u64(svptrue_b32(), U32_DATA.as_ptr(), offsets);
-    let loaded = svldff1uw_gather_u64offset_u64(svptrue_b32(), U32_DATA.as_ptr(), offsets);
+    let _ = svld1uw_gather_u64offset_u64(svptrue_b32(), ptr, offsets);
+    let loaded = svldff1uw_gather_u64offset_u64(svptrue_b32(), ptr, offsets);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9170,9 +9310,10 @@ unsafe fn test_svldff1uw_gather_u64base_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_s16() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_s16(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldff1ub_s16(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1ub_s16(svptrue_b8(), ptr);
+    let loaded = svldff1ub_s16(svptrue_b8(), ptr);
     assert_vector_matches_i16(
         loaded,
         svindex_s16((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9180,9 +9321,10 @@ unsafe fn test_svldff1ub_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_s32() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_s32(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldff1ub_s32(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1ub_s32(svptrue_b8(), ptr);
+    let loaded = svldff1ub_s32(svptrue_b8(), ptr);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9190,9 +9332,10 @@ unsafe fn test_svldff1ub_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_s32() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_s32(svptrue_b16(), U16_DATA.as_ptr());
-    let loaded = svldff1uh_s32(svptrue_b16(), U16_DATA.as_ptr());
+    let _ = svld1uh_s32(svptrue_b16(), ptr);
+    let loaded = svldff1uh_s32(svptrue_b16(), ptr);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9200,9 +9343,10 @@ unsafe fn test_svldff1uh_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_s64() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_s64(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldff1ub_s64(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1ub_s64(svptrue_b8(), ptr);
+    let loaded = svldff1ub_s64(svptrue_b8(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9210,9 +9354,10 @@ unsafe fn test_svldff1ub_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_s64() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_s64(svptrue_b16(), U16_DATA.as_ptr());
-    let loaded = svldff1uh_s64(svptrue_b16(), U16_DATA.as_ptr());
+    let _ = svld1uh_s64(svptrue_b16(), ptr);
+    let loaded = svldff1uh_s64(svptrue_b16(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9220,9 +9365,10 @@ unsafe fn test_svldff1uh_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uw_s64() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_s64(svptrue_b32(), U32_DATA.as_ptr());
-    let loaded = svldff1uw_s64(svptrue_b32(), U32_DATA.as_ptr());
+    let _ = svld1uw_s64(svptrue_b32(), ptr);
+    let loaded = svldff1uw_s64(svptrue_b32(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9230,9 +9376,10 @@ unsafe fn test_svldff1uw_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_u16() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_u16(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldff1ub_u16(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1ub_u16(svptrue_b8(), ptr);
+    let loaded = svldff1ub_u16(svptrue_b8(), ptr);
     assert_vector_matches_u16(
         loaded,
         svindex_u16((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9240,9 +9387,10 @@ unsafe fn test_svldff1ub_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_u32() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_u32(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldff1ub_u32(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1ub_u32(svptrue_b8(), ptr);
+    let loaded = svldff1ub_u32(svptrue_b8(), ptr);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9250,9 +9398,10 @@ unsafe fn test_svldff1ub_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_u32() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_u32(svptrue_b16(), U16_DATA.as_ptr());
-    let loaded = svldff1uh_u32(svptrue_b16(), U16_DATA.as_ptr());
+    let _ = svld1uh_u32(svptrue_b16(), ptr);
+    let loaded = svldff1uh_u32(svptrue_b16(), ptr);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9260,9 +9409,10 @@ unsafe fn test_svldff1uh_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_u64() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_u64(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldff1ub_u64(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1ub_u64(svptrue_b8(), ptr);
+    let loaded = svldff1ub_u64(svptrue_b8(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9270,9 +9420,10 @@ unsafe fn test_svldff1ub_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_u64() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_u64(svptrue_b16(), U16_DATA.as_ptr());
-    let loaded = svldff1uh_u64(svptrue_b16(), U16_DATA.as_ptr());
+    let _ = svld1uh_u64(svptrue_b16(), ptr);
+    let loaded = svldff1uh_u64(svptrue_b16(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9280,9 +9431,10 @@ unsafe fn test_svldff1uh_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uw_u64() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_u64(svptrue_b32(), U32_DATA.as_ptr());
-    let loaded = svldff1uw_u64(svptrue_b32(), U32_DATA.as_ptr());
+    let _ = svld1uw_u64(svptrue_b32(), ptr);
+    let loaded = svldff1uw_u64(svptrue_b32(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9290,9 +9442,10 @@ unsafe fn test_svldff1uw_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_vnum_s16() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_vnum_s16(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldff1ub_vnum_s16(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1ub_vnum_s16(svptrue_b8(), ptr, 1);
+    let loaded = svldff1ub_vnum_s16(svptrue_b8(), ptr, 1);
     let len = svcnth() as usize;
     assert_vector_matches_i16(
         loaded,
@@ -9304,9 +9457,10 @@ unsafe fn test_svldff1ub_vnum_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_vnum_s32() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_vnum_s32(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldff1ub_vnum_s32(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1ub_vnum_s32(svptrue_b8(), ptr, 1);
+    let loaded = svldff1ub_vnum_s32(svptrue_b8(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_i32(
         loaded,
@@ -9318,9 +9472,10 @@ unsafe fn test_svldff1ub_vnum_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_vnum_s32() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_vnum_s32(svptrue_b16(), U16_DATA.as_ptr(), 1);
-    let loaded = svldff1uh_vnum_s32(svptrue_b16(), U16_DATA.as_ptr(), 1);
+    let _ = svld1uh_vnum_s32(svptrue_b16(), ptr, 1);
+    let loaded = svldff1uh_vnum_s32(svptrue_b16(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_i32(
         loaded,
@@ -9332,9 +9487,10 @@ unsafe fn test_svldff1uh_vnum_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_vnum_s64() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_vnum_s64(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldff1ub_vnum_s64(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1ub_vnum_s64(svptrue_b8(), ptr, 1);
+    let loaded = svldff1ub_vnum_s64(svptrue_b8(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -9346,9 +9502,10 @@ unsafe fn test_svldff1ub_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_vnum_s64() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_vnum_s64(svptrue_b16(), U16_DATA.as_ptr(), 1);
-    let loaded = svldff1uh_vnum_s64(svptrue_b16(), U16_DATA.as_ptr(), 1);
+    let _ = svld1uh_vnum_s64(svptrue_b16(), ptr, 1);
+    let loaded = svldff1uh_vnum_s64(svptrue_b16(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -9360,9 +9517,10 @@ unsafe fn test_svldff1uh_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uw_vnum_s64() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_vnum_s64(svptrue_b32(), U32_DATA.as_ptr(), 1);
-    let loaded = svldff1uw_vnum_s64(svptrue_b32(), U32_DATA.as_ptr(), 1);
+    let _ = svld1uw_vnum_s64(svptrue_b32(), ptr, 1);
+    let loaded = svldff1uw_vnum_s64(svptrue_b32(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -9374,9 +9532,10 @@ unsafe fn test_svldff1uw_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_vnum_u16() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_vnum_u16(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldff1ub_vnum_u16(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1ub_vnum_u16(svptrue_b8(), ptr, 1);
+    let loaded = svldff1ub_vnum_u16(svptrue_b8(), ptr, 1);
     let len = svcnth() as usize;
     assert_vector_matches_u16(
         loaded,
@@ -9388,9 +9547,10 @@ unsafe fn test_svldff1ub_vnum_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_vnum_u32() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_vnum_u32(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldff1ub_vnum_u32(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1ub_vnum_u32(svptrue_b8(), ptr, 1);
+    let loaded = svldff1ub_vnum_u32(svptrue_b8(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_u32(
         loaded,
@@ -9402,9 +9562,10 @@ unsafe fn test_svldff1ub_vnum_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_vnum_u32() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_vnum_u32(svptrue_b16(), U16_DATA.as_ptr(), 1);
-    let loaded = svldff1uh_vnum_u32(svptrue_b16(), U16_DATA.as_ptr(), 1);
+    let _ = svld1uh_vnum_u32(svptrue_b16(), ptr, 1);
+    let loaded = svldff1uh_vnum_u32(svptrue_b16(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_u32(
         loaded,
@@ -9416,9 +9577,10 @@ unsafe fn test_svldff1uh_vnum_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1ub_vnum_u64() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_vnum_u64(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldff1ub_vnum_u64(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1ub_vnum_u64(svptrue_b8(), ptr, 1);
+    let loaded = svldff1ub_vnum_u64(svptrue_b8(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -9430,9 +9592,10 @@ unsafe fn test_svldff1ub_vnum_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_vnum_u64() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_vnum_u64(svptrue_b16(), U16_DATA.as_ptr(), 1);
-    let loaded = svldff1uh_vnum_u64(svptrue_b16(), U16_DATA.as_ptr(), 1);
+    let _ = svld1uh_vnum_u64(svptrue_b16(), ptr, 1);
+    let loaded = svldff1uh_vnum_u64(svptrue_b16(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -9444,9 +9607,10 @@ unsafe fn test_svldff1uh_vnum_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uw_vnum_u64() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_vnum_u64(svptrue_b32(), U32_DATA.as_ptr(), 1);
-    let loaded = svldff1uw_vnum_u64(svptrue_b32(), U32_DATA.as_ptr(), 1);
+    let _ = svld1uw_vnum_u64(svptrue_b32(), ptr, 1);
+    let loaded = svldff1uw_vnum_u64(svptrue_b32(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -9459,9 +9623,10 @@ unsafe fn test_svldff1uw_vnum_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_s32index_s32() {
     let indices = svindex_s32(0, 1);
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_s32index_s32(svptrue_b16(), U16_DATA.as_ptr(), indices);
-    let loaded = svldff1uh_gather_s32index_s32(svptrue_b16(), U16_DATA.as_ptr(), indices);
+    let _ = svld1uh_gather_s32index_s32(svptrue_b16(), ptr, indices);
+    let loaded = svldff1uh_gather_s32index_s32(svptrue_b16(), ptr, indices);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9470,9 +9635,10 @@ unsafe fn test_svldff1uh_gather_s32index_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_s32index_u32() {
     let indices = svindex_s32(0, 1);
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_s32index_u32(svptrue_b16(), U16_DATA.as_ptr(), indices);
-    let loaded = svldff1uh_gather_s32index_u32(svptrue_b16(), U16_DATA.as_ptr(), indices);
+    let _ = svld1uh_gather_s32index_u32(svptrue_b16(), ptr, indices);
+    let loaded = svldff1uh_gather_s32index_u32(svptrue_b16(), ptr, indices);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9481,9 +9647,10 @@ unsafe fn test_svldff1uh_gather_s32index_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_s64index_s64() {
     let indices = svindex_s64(0, 1);
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_s64index_s64(svptrue_b16(), U16_DATA.as_ptr(), indices);
-    let loaded = svldff1uh_gather_s64index_s64(svptrue_b16(), U16_DATA.as_ptr(), indices);
+    let _ = svld1uh_gather_s64index_s64(svptrue_b16(), ptr, indices);
+    let loaded = svldff1uh_gather_s64index_s64(svptrue_b16(), ptr, indices);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9492,9 +9659,10 @@ unsafe fn test_svldff1uh_gather_s64index_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uw_gather_s64index_s64() {
     let indices = svindex_s64(0, 1);
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_gather_s64index_s64(svptrue_b32(), U32_DATA.as_ptr(), indices);
-    let loaded = svldff1uw_gather_s64index_s64(svptrue_b32(), U32_DATA.as_ptr(), indices);
+    let _ = svld1uw_gather_s64index_s64(svptrue_b32(), ptr, indices);
+    let loaded = svldff1uw_gather_s64index_s64(svptrue_b32(), ptr, indices);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9503,9 +9671,10 @@ unsafe fn test_svldff1uw_gather_s64index_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_s64index_u64() {
     let indices = svindex_s64(0, 1);
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_s64index_u64(svptrue_b16(), U16_DATA.as_ptr(), indices);
-    let loaded = svldff1uh_gather_s64index_u64(svptrue_b16(), U16_DATA.as_ptr(), indices);
+    let _ = svld1uh_gather_s64index_u64(svptrue_b16(), ptr, indices);
+    let loaded = svldff1uh_gather_s64index_u64(svptrue_b16(), ptr, indices);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9514,9 +9683,10 @@ unsafe fn test_svldff1uh_gather_s64index_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uw_gather_s64index_u64() {
     let indices = svindex_s64(0, 1);
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_gather_s64index_u64(svptrue_b32(), U32_DATA.as_ptr(), indices);
-    let loaded = svldff1uw_gather_s64index_u64(svptrue_b32(), U32_DATA.as_ptr(), indices);
+    let _ = svld1uw_gather_s64index_u64(svptrue_b32(), ptr, indices);
+    let loaded = svldff1uw_gather_s64index_u64(svptrue_b32(), ptr, indices);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9525,9 +9695,10 @@ unsafe fn test_svldff1uw_gather_s64index_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_u32index_s32() {
     let indices = svindex_u32(0, 1);
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_u32index_s32(svptrue_b16(), U16_DATA.as_ptr(), indices);
-    let loaded = svldff1uh_gather_u32index_s32(svptrue_b16(), U16_DATA.as_ptr(), indices);
+    let _ = svld1uh_gather_u32index_s32(svptrue_b16(), ptr, indices);
+    let loaded = svldff1uh_gather_u32index_s32(svptrue_b16(), ptr, indices);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9536,9 +9707,10 @@ unsafe fn test_svldff1uh_gather_u32index_s32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_u32index_u32() {
     let indices = svindex_u32(0, 1);
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_u32index_u32(svptrue_b16(), U16_DATA.as_ptr(), indices);
-    let loaded = svldff1uh_gather_u32index_u32(svptrue_b16(), U16_DATA.as_ptr(), indices);
+    let _ = svld1uh_gather_u32index_u32(svptrue_b16(), ptr, indices);
+    let loaded = svldff1uh_gather_u32index_u32(svptrue_b16(), ptr, indices);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9547,9 +9719,10 @@ unsafe fn test_svldff1uh_gather_u32index_u32() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_u64index_s64() {
     let indices = svindex_u64(0, 1);
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_u64index_s64(svptrue_b16(), U16_DATA.as_ptr(), indices);
-    let loaded = svldff1uh_gather_u64index_s64(svptrue_b16(), U16_DATA.as_ptr(), indices);
+    let _ = svld1uh_gather_u64index_s64(svptrue_b16(), ptr, indices);
+    let loaded = svldff1uh_gather_u64index_s64(svptrue_b16(), ptr, indices);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9558,9 +9731,10 @@ unsafe fn test_svldff1uh_gather_u64index_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uw_gather_u64index_s64() {
     let indices = svindex_u64(0, 1);
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_gather_u64index_s64(svptrue_b32(), U32_DATA.as_ptr(), indices);
-    let loaded = svldff1uw_gather_u64index_s64(svptrue_b32(), U32_DATA.as_ptr(), indices);
+    let _ = svld1uw_gather_u64index_s64(svptrue_b32(), ptr, indices);
+    let loaded = svldff1uw_gather_u64index_s64(svptrue_b32(), ptr, indices);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9569,9 +9743,10 @@ unsafe fn test_svldff1uw_gather_u64index_s64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uh_gather_u64index_u64() {
     let indices = svindex_u64(0, 1);
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_gather_u64index_u64(svptrue_b16(), U16_DATA.as_ptr(), indices);
-    let loaded = svldff1uh_gather_u64index_u64(svptrue_b16(), U16_DATA.as_ptr(), indices);
+    let _ = svld1uh_gather_u64index_u64(svptrue_b16(), ptr, indices);
+    let loaded = svldff1uh_gather_u64index_u64(svptrue_b16(), ptr, indices);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9580,9 +9755,10 @@ unsafe fn test_svldff1uh_gather_u64index_u64() {
 #[simd_test(enable = "sve")]
 unsafe fn test_svldff1uw_gather_u64index_u64() {
     let indices = svindex_u64(0, 1);
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_gather_u64index_u64(svptrue_b32(), U32_DATA.as_ptr(), indices);
-    let loaded = svldff1uw_gather_u64index_u64(svptrue_b32(), U32_DATA.as_ptr(), indices);
+    let _ = svld1uw_gather_u64index_u64(svptrue_b32(), ptr, indices);
+    let loaded = svldff1uw_gather_u64index_u64(svptrue_b32(), ptr, indices);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9680,9 +9856,10 @@ unsafe fn test_svldff1uw_gather_u64base_index_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_f32() {
+    let ptr = F32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_f32(svptrue_b32(), F32_DATA.as_ptr());
-    let loaded = svldnf1_f32(svptrue_b32(), F32_DATA.as_ptr());
+    let _ = svld1_f32(svptrue_b32(), ptr);
+    let loaded = svldnf1_f32(svptrue_b32(), ptr);
     assert_vector_matches_f32(
         loaded,
         svcvt_f32_s32_x(
@@ -9693,9 +9870,10 @@ unsafe fn test_svldnf1_f32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_f64() {
+    let ptr = F64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_f64(svptrue_b64(), F64_DATA.as_ptr());
-    let loaded = svldnf1_f64(svptrue_b64(), F64_DATA.as_ptr());
+    let _ = svld1_f64(svptrue_b64(), ptr);
+    let loaded = svldnf1_f64(svptrue_b64(), ptr);
     assert_vector_matches_f64(
         loaded,
         svcvt_f64_s64_x(
@@ -9706,9 +9884,10 @@ unsafe fn test_svldnf1_f64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_s8() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_s8(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldnf1_s8(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1_s8(svptrue_b8(), ptr);
+    let loaded = svldnf1_s8(svptrue_b8(), ptr);
     assert_vector_matches_i8(
         loaded,
         svindex_s8((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9716,9 +9895,10 @@ unsafe fn test_svldnf1_s8() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_s16() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_s16(svptrue_b16(), I16_DATA.as_ptr());
-    let loaded = svldnf1_s16(svptrue_b16(), I16_DATA.as_ptr());
+    let _ = svld1_s16(svptrue_b16(), ptr);
+    let loaded = svldnf1_s16(svptrue_b16(), ptr);
     assert_vector_matches_i16(
         loaded,
         svindex_s16((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9726,9 +9906,10 @@ unsafe fn test_svldnf1_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_s32() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_s32(svptrue_b32(), I32_DATA.as_ptr());
-    let loaded = svldnf1_s32(svptrue_b32(), I32_DATA.as_ptr());
+    let _ = svld1_s32(svptrue_b32(), ptr);
+    let loaded = svldnf1_s32(svptrue_b32(), ptr);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9736,9 +9917,10 @@ unsafe fn test_svldnf1_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_s64() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_s64(svptrue_b64(), I64_DATA.as_ptr());
-    let loaded = svldnf1_s64(svptrue_b64(), I64_DATA.as_ptr());
+    let _ = svld1_s64(svptrue_b64(), ptr);
+    let loaded = svldnf1_s64(svptrue_b64(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9746,9 +9928,10 @@ unsafe fn test_svldnf1_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_u8() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_u8(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldnf1_u8(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1_u8(svptrue_b8(), ptr);
+    let loaded = svldnf1_u8(svptrue_b8(), ptr);
     assert_vector_matches_u8(
         loaded,
         svindex_u8((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9756,9 +9939,10 @@ unsafe fn test_svldnf1_u8() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_u16() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_u16(svptrue_b16(), U16_DATA.as_ptr());
-    let loaded = svldnf1_u16(svptrue_b16(), U16_DATA.as_ptr());
+    let _ = svld1_u16(svptrue_b16(), ptr);
+    let loaded = svldnf1_u16(svptrue_b16(), ptr);
     assert_vector_matches_u16(
         loaded,
         svindex_u16((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9766,9 +9950,10 @@ unsafe fn test_svldnf1_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_u32() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_u32(svptrue_b32(), U32_DATA.as_ptr());
-    let loaded = svldnf1_u32(svptrue_b32(), U32_DATA.as_ptr());
+    let _ = svld1_u32(svptrue_b32(), ptr);
+    let loaded = svldnf1_u32(svptrue_b32(), ptr);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9776,9 +9961,10 @@ unsafe fn test_svldnf1_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_u64() {
+    let ptr = U64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_u64(svptrue_b64(), U64_DATA.as_ptr());
-    let loaded = svldnf1_u64(svptrue_b64(), U64_DATA.as_ptr());
+    let _ = svld1_u64(svptrue_b64(), ptr);
+    let loaded = svldnf1_u64(svptrue_b64(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9786,9 +9972,10 @@ unsafe fn test_svldnf1_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_vnum_f32() {
+    let ptr = F32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_f32(svptrue_b32(), F32_DATA.as_ptr(), 1);
-    let loaded = svldnf1_vnum_f32(svptrue_b32(), F32_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_f32(svptrue_b32(), ptr, 1);
+    let loaded = svldnf1_vnum_f32(svptrue_b32(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_f32(
         loaded,
@@ -9803,9 +9990,10 @@ unsafe fn test_svldnf1_vnum_f32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_vnum_f64() {
+    let ptr = F64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_f64(svptrue_b64(), F64_DATA.as_ptr(), 1);
-    let loaded = svldnf1_vnum_f64(svptrue_b64(), F64_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_f64(svptrue_b64(), ptr, 1);
+    let loaded = svldnf1_vnum_f64(svptrue_b64(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_f64(
         loaded,
@@ -9820,9 +10008,10 @@ unsafe fn test_svldnf1_vnum_f64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_vnum_s8() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_s8(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldnf1_vnum_s8(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_s8(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1_vnum_s8(svptrue_b8(), ptr, 1);
     let len = svcntb() as usize;
     assert_vector_matches_i8(
         loaded,
@@ -9834,9 +10023,10 @@ unsafe fn test_svldnf1_vnum_s8() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_vnum_s16() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_s16(svptrue_b16(), I16_DATA.as_ptr(), 1);
-    let loaded = svldnf1_vnum_s16(svptrue_b16(), I16_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_s16(svptrue_b16(), ptr, 1);
+    let loaded = svldnf1_vnum_s16(svptrue_b16(), ptr, 1);
     let len = svcnth() as usize;
     assert_vector_matches_i16(
         loaded,
@@ -9848,9 +10038,10 @@ unsafe fn test_svldnf1_vnum_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_vnum_s32() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_s32(svptrue_b32(), I32_DATA.as_ptr(), 1);
-    let loaded = svldnf1_vnum_s32(svptrue_b32(), I32_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_s32(svptrue_b32(), ptr, 1);
+    let loaded = svldnf1_vnum_s32(svptrue_b32(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_i32(
         loaded,
@@ -9862,9 +10053,10 @@ unsafe fn test_svldnf1_vnum_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_vnum_s64() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_s64(svptrue_b64(), I64_DATA.as_ptr(), 1);
-    let loaded = svldnf1_vnum_s64(svptrue_b64(), I64_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_s64(svptrue_b64(), ptr, 1);
+    let loaded = svldnf1_vnum_s64(svptrue_b64(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -9876,9 +10068,10 @@ unsafe fn test_svldnf1_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_vnum_u8() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_u8(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldnf1_vnum_u8(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_u8(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1_vnum_u8(svptrue_b8(), ptr, 1);
     let len = svcntb() as usize;
     assert_vector_matches_u8(
         loaded,
@@ -9890,9 +10083,10 @@ unsafe fn test_svldnf1_vnum_u8() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_vnum_u16() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_u16(svptrue_b16(), U16_DATA.as_ptr(), 1);
-    let loaded = svldnf1_vnum_u16(svptrue_b16(), U16_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_u16(svptrue_b16(), ptr, 1);
+    let loaded = svldnf1_vnum_u16(svptrue_b16(), ptr, 1);
     let len = svcnth() as usize;
     assert_vector_matches_u16(
         loaded,
@@ -9904,9 +10098,10 @@ unsafe fn test_svldnf1_vnum_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_vnum_u32() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_u32(svptrue_b32(), U32_DATA.as_ptr(), 1);
-    let loaded = svldnf1_vnum_u32(svptrue_b32(), U32_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_u32(svptrue_b32(), ptr, 1);
+    let loaded = svldnf1_vnum_u32(svptrue_b32(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_u32(
         loaded,
@@ -9918,9 +10113,10 @@ unsafe fn test_svldnf1_vnum_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1_vnum_u64() {
+    let ptr = U64_DATA.as_ptr();
     svsetffr();
-    let _ = svld1_vnum_u64(svptrue_b64(), U64_DATA.as_ptr(), 1);
-    let loaded = svldnf1_vnum_u64(svptrue_b64(), U64_DATA.as_ptr(), 1);
+    let _ = svld1_vnum_u64(svptrue_b64(), ptr, 1);
+    let loaded = svldnf1_vnum_u64(svptrue_b64(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -9932,9 +10128,10 @@ unsafe fn test_svldnf1_vnum_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sb_s16() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_s16(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldnf1sb_s16(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1sb_s16(svptrue_b8(), ptr);
+    let loaded = svldnf1sb_s16(svptrue_b8(), ptr);
     assert_vector_matches_i16(
         loaded,
         svindex_s16((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9942,9 +10139,10 @@ unsafe fn test_svldnf1sb_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sb_s32() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_s32(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldnf1sb_s32(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1sb_s32(svptrue_b8(), ptr);
+    let loaded = svldnf1sb_s32(svptrue_b8(), ptr);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9952,9 +10150,10 @@ unsafe fn test_svldnf1sb_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sh_s32() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_s32(svptrue_b16(), I16_DATA.as_ptr());
-    let loaded = svldnf1sh_s32(svptrue_b16(), I16_DATA.as_ptr());
+    let _ = svld1sh_s32(svptrue_b16(), ptr);
+    let loaded = svldnf1sh_s32(svptrue_b16(), ptr);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9962,9 +10161,10 @@ unsafe fn test_svldnf1sh_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sb_s64() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_s64(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldnf1sb_s64(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1sb_s64(svptrue_b8(), ptr);
+    let loaded = svldnf1sb_s64(svptrue_b8(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9972,9 +10172,10 @@ unsafe fn test_svldnf1sb_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sh_s64() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_s64(svptrue_b16(), I16_DATA.as_ptr());
-    let loaded = svldnf1sh_s64(svptrue_b16(), I16_DATA.as_ptr());
+    let _ = svld1sh_s64(svptrue_b16(), ptr);
+    let loaded = svldnf1sh_s64(svptrue_b16(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9982,9 +10183,10 @@ unsafe fn test_svldnf1sh_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sw_s64() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_s64(svptrue_b32(), I32_DATA.as_ptr());
-    let loaded = svldnf1sw_s64(svptrue_b32(), I32_DATA.as_ptr());
+    let _ = svld1sw_s64(svptrue_b32(), ptr);
+    let loaded = svldnf1sw_s64(svptrue_b32(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -9992,9 +10194,10 @@ unsafe fn test_svldnf1sw_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sb_u16() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_u16(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldnf1sb_u16(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1sb_u16(svptrue_b8(), ptr);
+    let loaded = svldnf1sb_u16(svptrue_b8(), ptr);
     assert_vector_matches_u16(
         loaded,
         svindex_u16((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10002,9 +10205,10 @@ unsafe fn test_svldnf1sb_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sb_u32() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_u32(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldnf1sb_u32(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1sb_u32(svptrue_b8(), ptr);
+    let loaded = svldnf1sb_u32(svptrue_b8(), ptr);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10012,9 +10216,10 @@ unsafe fn test_svldnf1sb_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sh_u32() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_u32(svptrue_b16(), I16_DATA.as_ptr());
-    let loaded = svldnf1sh_u32(svptrue_b16(), I16_DATA.as_ptr());
+    let _ = svld1sh_u32(svptrue_b16(), ptr);
+    let loaded = svldnf1sh_u32(svptrue_b16(), ptr);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10022,9 +10227,10 @@ unsafe fn test_svldnf1sh_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sb_u64() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_u64(svptrue_b8(), I8_DATA.as_ptr());
-    let loaded = svldnf1sb_u64(svptrue_b8(), I8_DATA.as_ptr());
+    let _ = svld1sb_u64(svptrue_b8(), ptr);
+    let loaded = svldnf1sb_u64(svptrue_b8(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10032,9 +10238,10 @@ unsafe fn test_svldnf1sb_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sh_u64() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_u64(svptrue_b16(), I16_DATA.as_ptr());
-    let loaded = svldnf1sh_u64(svptrue_b16(), I16_DATA.as_ptr());
+    let _ = svld1sh_u64(svptrue_b16(), ptr);
+    let loaded = svldnf1sh_u64(svptrue_b16(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10042,9 +10249,10 @@ unsafe fn test_svldnf1sh_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sw_u64() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_u64(svptrue_b32(), I32_DATA.as_ptr());
-    let loaded = svldnf1sw_u64(svptrue_b32(), I32_DATA.as_ptr());
+    let _ = svld1sw_u64(svptrue_b32(), ptr);
+    let loaded = svldnf1sw_u64(svptrue_b32(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10052,9 +10260,10 @@ unsafe fn test_svldnf1sw_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sb_vnum_s16() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_vnum_s16(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldnf1sb_vnum_s16(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1sb_vnum_s16(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1sb_vnum_s16(svptrue_b8(), ptr, 1);
     let len = svcnth() as usize;
     assert_vector_matches_i16(
         loaded,
@@ -10066,9 +10275,10 @@ unsafe fn test_svldnf1sb_vnum_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sb_vnum_s32() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_vnum_s32(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldnf1sb_vnum_s32(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1sb_vnum_s32(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1sb_vnum_s32(svptrue_b8(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_i32(
         loaded,
@@ -10080,9 +10290,10 @@ unsafe fn test_svldnf1sb_vnum_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sh_vnum_s32() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_vnum_s32(svptrue_b16(), I16_DATA.as_ptr(), 1);
-    let loaded = svldnf1sh_vnum_s32(svptrue_b16(), I16_DATA.as_ptr(), 1);
+    let _ = svld1sh_vnum_s32(svptrue_b16(), ptr, 1);
+    let loaded = svldnf1sh_vnum_s32(svptrue_b16(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_i32(
         loaded,
@@ -10094,9 +10305,10 @@ unsafe fn test_svldnf1sh_vnum_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sb_vnum_s64() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_vnum_s64(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldnf1sb_vnum_s64(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1sb_vnum_s64(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1sb_vnum_s64(svptrue_b8(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -10108,9 +10320,10 @@ unsafe fn test_svldnf1sb_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sh_vnum_s64() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_vnum_s64(svptrue_b16(), I16_DATA.as_ptr(), 1);
-    let loaded = svldnf1sh_vnum_s64(svptrue_b16(), I16_DATA.as_ptr(), 1);
+    let _ = svld1sh_vnum_s64(svptrue_b16(), ptr, 1);
+    let loaded = svldnf1sh_vnum_s64(svptrue_b16(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -10122,9 +10335,10 @@ unsafe fn test_svldnf1sh_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sw_vnum_s64() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_vnum_s64(svptrue_b32(), I32_DATA.as_ptr(), 1);
-    let loaded = svldnf1sw_vnum_s64(svptrue_b32(), I32_DATA.as_ptr(), 1);
+    let _ = svld1sw_vnum_s64(svptrue_b32(), ptr, 1);
+    let loaded = svldnf1sw_vnum_s64(svptrue_b32(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -10136,9 +10350,10 @@ unsafe fn test_svldnf1sw_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sb_vnum_u16() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_vnum_u16(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldnf1sb_vnum_u16(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1sb_vnum_u16(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1sb_vnum_u16(svptrue_b8(), ptr, 1);
     let len = svcnth() as usize;
     assert_vector_matches_u16(
         loaded,
@@ -10150,9 +10365,10 @@ unsafe fn test_svldnf1sb_vnum_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sb_vnum_u32() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_vnum_u32(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldnf1sb_vnum_u32(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1sb_vnum_u32(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1sb_vnum_u32(svptrue_b8(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_u32(
         loaded,
@@ -10164,9 +10380,10 @@ unsafe fn test_svldnf1sb_vnum_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sh_vnum_u32() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_vnum_u32(svptrue_b16(), I16_DATA.as_ptr(), 1);
-    let loaded = svldnf1sh_vnum_u32(svptrue_b16(), I16_DATA.as_ptr(), 1);
+    let _ = svld1sh_vnum_u32(svptrue_b16(), ptr, 1);
+    let loaded = svldnf1sh_vnum_u32(svptrue_b16(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_u32(
         loaded,
@@ -10178,9 +10395,10 @@ unsafe fn test_svldnf1sh_vnum_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sb_vnum_u64() {
+    let ptr = I8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sb_vnum_u64(svptrue_b8(), I8_DATA.as_ptr(), 1);
-    let loaded = svldnf1sb_vnum_u64(svptrue_b8(), I8_DATA.as_ptr(), 1);
+    let _ = svld1sb_vnum_u64(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1sb_vnum_u64(svptrue_b8(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -10192,9 +10410,10 @@ unsafe fn test_svldnf1sb_vnum_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sh_vnum_u64() {
+    let ptr = I16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sh_vnum_u64(svptrue_b16(), I16_DATA.as_ptr(), 1);
-    let loaded = svldnf1sh_vnum_u64(svptrue_b16(), I16_DATA.as_ptr(), 1);
+    let _ = svld1sh_vnum_u64(svptrue_b16(), ptr, 1);
+    let loaded = svldnf1sh_vnum_u64(svptrue_b16(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -10206,9 +10425,10 @@ unsafe fn test_svldnf1sh_vnum_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1sw_vnum_u64() {
+    let ptr = I32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1sw_vnum_u64(svptrue_b32(), I32_DATA.as_ptr(), 1);
-    let loaded = svldnf1sw_vnum_u64(svptrue_b32(), I32_DATA.as_ptr(), 1);
+    let _ = svld1sw_vnum_u64(svptrue_b32(), ptr, 1);
+    let loaded = svldnf1sw_vnum_u64(svptrue_b32(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -10220,9 +10440,10 @@ unsafe fn test_svldnf1sw_vnum_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1ub_s16() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_s16(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldnf1ub_s16(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1ub_s16(svptrue_b8(), ptr);
+    let loaded = svldnf1ub_s16(svptrue_b8(), ptr);
     assert_vector_matches_i16(
         loaded,
         svindex_s16((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10230,9 +10451,10 @@ unsafe fn test_svldnf1ub_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1ub_s32() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_s32(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldnf1ub_s32(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1ub_s32(svptrue_b8(), ptr);
+    let loaded = svldnf1ub_s32(svptrue_b8(), ptr);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10240,9 +10462,10 @@ unsafe fn test_svldnf1ub_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1uh_s32() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_s32(svptrue_b16(), U16_DATA.as_ptr());
-    let loaded = svldnf1uh_s32(svptrue_b16(), U16_DATA.as_ptr());
+    let _ = svld1uh_s32(svptrue_b16(), ptr);
+    let loaded = svldnf1uh_s32(svptrue_b16(), ptr);
     assert_vector_matches_i32(
         loaded,
         svindex_s32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10250,9 +10473,10 @@ unsafe fn test_svldnf1uh_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1ub_s64() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_s64(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldnf1ub_s64(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1ub_s64(svptrue_b8(), ptr);
+    let loaded = svldnf1ub_s64(svptrue_b8(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10260,9 +10484,10 @@ unsafe fn test_svldnf1ub_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1uh_s64() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_s64(svptrue_b16(), U16_DATA.as_ptr());
-    let loaded = svldnf1uh_s64(svptrue_b16(), U16_DATA.as_ptr());
+    let _ = svld1uh_s64(svptrue_b16(), ptr);
+    let loaded = svldnf1uh_s64(svptrue_b16(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10270,9 +10495,10 @@ unsafe fn test_svldnf1uh_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1uw_s64() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_s64(svptrue_b32(), U32_DATA.as_ptr());
-    let loaded = svldnf1uw_s64(svptrue_b32(), U32_DATA.as_ptr());
+    let _ = svld1uw_s64(svptrue_b32(), ptr);
+    let loaded = svldnf1uw_s64(svptrue_b32(), ptr);
     assert_vector_matches_i64(
         loaded,
         svindex_s64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10280,9 +10506,10 @@ unsafe fn test_svldnf1uw_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1ub_u16() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_u16(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldnf1ub_u16(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1ub_u16(svptrue_b8(), ptr);
+    let loaded = svldnf1ub_u16(svptrue_b8(), ptr);
     assert_vector_matches_u16(
         loaded,
         svindex_u16((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10290,9 +10517,10 @@ unsafe fn test_svldnf1ub_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1ub_u32() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_u32(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldnf1ub_u32(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1ub_u32(svptrue_b8(), ptr);
+    let loaded = svldnf1ub_u32(svptrue_b8(), ptr);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10300,9 +10528,10 @@ unsafe fn test_svldnf1ub_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1uh_u32() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_u32(svptrue_b16(), U16_DATA.as_ptr());
-    let loaded = svldnf1uh_u32(svptrue_b16(), U16_DATA.as_ptr());
+    let _ = svld1uh_u32(svptrue_b16(), ptr);
+    let loaded = svldnf1uh_u32(svptrue_b16(), ptr);
     assert_vector_matches_u32(
         loaded,
         svindex_u32((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10310,9 +10539,10 @@ unsafe fn test_svldnf1uh_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1ub_u64() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_u64(svptrue_b8(), U8_DATA.as_ptr());
-    let loaded = svldnf1ub_u64(svptrue_b8(), U8_DATA.as_ptr());
+    let _ = svld1ub_u64(svptrue_b8(), ptr);
+    let loaded = svldnf1ub_u64(svptrue_b8(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10320,9 +10550,10 @@ unsafe fn test_svldnf1ub_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1uh_u64() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_u64(svptrue_b16(), U16_DATA.as_ptr());
-    let loaded = svldnf1uh_u64(svptrue_b16(), U16_DATA.as_ptr());
+    let _ = svld1uh_u64(svptrue_b16(), ptr);
+    let loaded = svldnf1uh_u64(svptrue_b16(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10330,9 +10561,10 @@ unsafe fn test_svldnf1uh_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1uw_u64() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_u64(svptrue_b32(), U32_DATA.as_ptr());
-    let loaded = svldnf1uw_u64(svptrue_b32(), U32_DATA.as_ptr());
+    let _ = svld1uw_u64(svptrue_b32(), ptr);
+    let loaded = svldnf1uw_u64(svptrue_b32(), ptr);
     assert_vector_matches_u64(
         loaded,
         svindex_u64((0usize).try_into().unwrap(), 1usize.try_into().unwrap()),
@@ -10340,9 +10572,10 @@ unsafe fn test_svldnf1uw_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1ub_vnum_s16() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_vnum_s16(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldnf1ub_vnum_s16(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1ub_vnum_s16(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1ub_vnum_s16(svptrue_b8(), ptr, 1);
     let len = svcnth() as usize;
     assert_vector_matches_i16(
         loaded,
@@ -10354,9 +10587,10 @@ unsafe fn test_svldnf1ub_vnum_s16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1ub_vnum_s32() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_vnum_s32(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldnf1ub_vnum_s32(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1ub_vnum_s32(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1ub_vnum_s32(svptrue_b8(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_i32(
         loaded,
@@ -10368,9 +10602,10 @@ unsafe fn test_svldnf1ub_vnum_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1uh_vnum_s32() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_vnum_s32(svptrue_b16(), U16_DATA.as_ptr(), 1);
-    let loaded = svldnf1uh_vnum_s32(svptrue_b16(), U16_DATA.as_ptr(), 1);
+    let _ = svld1uh_vnum_s32(svptrue_b16(), ptr, 1);
+    let loaded = svldnf1uh_vnum_s32(svptrue_b16(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_i32(
         loaded,
@@ -10382,9 +10617,10 @@ unsafe fn test_svldnf1uh_vnum_s32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1ub_vnum_s64() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_vnum_s64(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldnf1ub_vnum_s64(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1ub_vnum_s64(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1ub_vnum_s64(svptrue_b8(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -10396,9 +10632,10 @@ unsafe fn test_svldnf1ub_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1uh_vnum_s64() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_vnum_s64(svptrue_b16(), U16_DATA.as_ptr(), 1);
-    let loaded = svldnf1uh_vnum_s64(svptrue_b16(), U16_DATA.as_ptr(), 1);
+    let _ = svld1uh_vnum_s64(svptrue_b16(), ptr, 1);
+    let loaded = svldnf1uh_vnum_s64(svptrue_b16(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -10410,9 +10647,10 @@ unsafe fn test_svldnf1uh_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1uw_vnum_s64() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_vnum_s64(svptrue_b32(), U32_DATA.as_ptr(), 1);
-    let loaded = svldnf1uw_vnum_s64(svptrue_b32(), U32_DATA.as_ptr(), 1);
+    let _ = svld1uw_vnum_s64(svptrue_b32(), ptr, 1);
+    let loaded = svldnf1uw_vnum_s64(svptrue_b32(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_i64(
         loaded,
@@ -10424,9 +10662,10 @@ unsafe fn test_svldnf1uw_vnum_s64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1ub_vnum_u16() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_vnum_u16(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldnf1ub_vnum_u16(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1ub_vnum_u16(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1ub_vnum_u16(svptrue_b8(), ptr, 1);
     let len = svcnth() as usize;
     assert_vector_matches_u16(
         loaded,
@@ -10438,9 +10677,10 @@ unsafe fn test_svldnf1ub_vnum_u16() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1ub_vnum_u32() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_vnum_u32(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldnf1ub_vnum_u32(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1ub_vnum_u32(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1ub_vnum_u32(svptrue_b8(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_u32(
         loaded,
@@ -10452,9 +10692,10 @@ unsafe fn test_svldnf1ub_vnum_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1uh_vnum_u32() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_vnum_u32(svptrue_b16(), U16_DATA.as_ptr(), 1);
-    let loaded = svldnf1uh_vnum_u32(svptrue_b16(), U16_DATA.as_ptr(), 1);
+    let _ = svld1uh_vnum_u32(svptrue_b16(), ptr, 1);
+    let loaded = svldnf1uh_vnum_u32(svptrue_b16(), ptr, 1);
     let len = svcntw() as usize;
     assert_vector_matches_u32(
         loaded,
@@ -10466,9 +10707,10 @@ unsafe fn test_svldnf1uh_vnum_u32() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1ub_vnum_u64() {
+    let ptr = U8_DATA.as_ptr();
     svsetffr();
-    let _ = svld1ub_vnum_u64(svptrue_b8(), U8_DATA.as_ptr(), 1);
-    let loaded = svldnf1ub_vnum_u64(svptrue_b8(), U8_DATA.as_ptr(), 1);
+    let _ = svld1ub_vnum_u64(svptrue_b8(), ptr, 1);
+    let loaded = svldnf1ub_vnum_u64(svptrue_b8(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -10480,9 +10722,10 @@ unsafe fn test_svldnf1ub_vnum_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1uh_vnum_u64() {
+    let ptr = U16_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uh_vnum_u64(svptrue_b16(), U16_DATA.as_ptr(), 1);
-    let loaded = svldnf1uh_vnum_u64(svptrue_b16(), U16_DATA.as_ptr(), 1);
+    let _ = svld1uh_vnum_u64(svptrue_b16(), ptr, 1);
+    let loaded = svldnf1uh_vnum_u64(svptrue_b16(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -10494,9 +10737,10 @@ unsafe fn test_svldnf1uh_vnum_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svldnf1uw_vnum_u64() {
+    let ptr = U32_DATA.as_ptr();
     svsetffr();
-    let _ = svld1uw_vnum_u64(svptrue_b32(), U32_DATA.as_ptr(), 1);
-    let loaded = svldnf1uw_vnum_u64(svptrue_b32(), U32_DATA.as_ptr(), 1);
+    let _ = svld1uw_vnum_u64(svptrue_b32(), ptr, 1);
+    let loaded = svldnf1uw_vnum_u64(svptrue_b32(), ptr, 1);
     let len = svcntd() as usize;
     assert_vector_matches_u64(
         loaded,
@@ -10902,183 +11146,155 @@ unsafe fn test_svldnt1_vnum_u64_with_svstnt1_vnum_u64() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfb() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfb::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b8(), I64_DATA.as_ptr());
+    let loaded = svprfb::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b8(), ptr);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfh() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfh::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b16(), I64_DATA.as_ptr());
+    let loaded = svprfh::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b16(), ptr);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfw() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfw::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b32(), I64_DATA.as_ptr());
+    let loaded = svprfw::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b32(), ptr);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfd() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfd::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b64(), I64_DATA.as_ptr());
+    let loaded = svprfd::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b64(), ptr);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfb_gather_s32offset() {
     let offsets = svindex_s32(0, 4u32.try_into().unwrap());
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfb_gather_s32offset::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b32(),
-        I64_DATA.as_ptr(),
-        offsets,
-    );
+    let loaded =
+        svprfb_gather_s32offset::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b32(), ptr, offsets);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfh_gather_s32index() {
     let indices = svindex_s32(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfh_gather_s32index::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b32(),
-        I64_DATA.as_ptr(),
-        indices,
-    );
+    let loaded =
+        svprfh_gather_s32index::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b32(), ptr, indices);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfw_gather_s32index() {
     let indices = svindex_s32(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfw_gather_s32index::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b32(),
-        I64_DATA.as_ptr(),
-        indices,
-    );
+    let loaded =
+        svprfw_gather_s32index::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b32(), ptr, indices);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfd_gather_s32index() {
     let indices = svindex_s32(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfd_gather_s32index::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b32(),
-        I64_DATA.as_ptr(),
-        indices,
-    );
+    let loaded =
+        svprfd_gather_s32index::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b32(), ptr, indices);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfb_gather_s64offset() {
     let offsets = svindex_s64(0, 8u32.try_into().unwrap());
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfb_gather_s64offset::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b64(),
-        I64_DATA.as_ptr(),
-        offsets,
-    );
+    let loaded =
+        svprfb_gather_s64offset::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b64(), ptr, offsets);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfh_gather_s64index() {
     let indices = svindex_s64(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfh_gather_s64index::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b64(),
-        I64_DATA.as_ptr(),
-        indices,
-    );
+    let loaded =
+        svprfh_gather_s64index::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b64(), ptr, indices);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfw_gather_s64index() {
     let indices = svindex_s64(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfw_gather_s64index::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b64(),
-        I64_DATA.as_ptr(),
-        indices,
-    );
+    let loaded =
+        svprfw_gather_s64index::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b64(), ptr, indices);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfd_gather_s64index() {
     let indices = svindex_s64(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfd_gather_s64index::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b64(),
-        I64_DATA.as_ptr(),
-        indices,
-    );
+    let loaded =
+        svprfd_gather_s64index::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b64(), ptr, indices);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfb_gather_u32offset() {
     let offsets = svindex_u32(0, 4u32.try_into().unwrap());
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfb_gather_u32offset::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b32(),
-        I64_DATA.as_ptr(),
-        offsets,
-    );
+    let loaded =
+        svprfb_gather_u32offset::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b32(), ptr, offsets);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfh_gather_u32index() {
     let indices = svindex_u32(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfh_gather_u32index::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b32(),
-        I64_DATA.as_ptr(),
-        indices,
-    );
+    let loaded =
+        svprfh_gather_u32index::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b32(), ptr, indices);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfw_gather_u32index() {
     let indices = svindex_u32(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfw_gather_u32index::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b32(),
-        I64_DATA.as_ptr(),
-        indices,
-    );
+    let loaded =
+        svprfw_gather_u32index::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b32(), ptr, indices);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfd_gather_u32index() {
     let indices = svindex_u32(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfd_gather_u32index::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b32(),
-        I64_DATA.as_ptr(),
-        indices,
-    );
+    let loaded =
+        svprfd_gather_u32index::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b32(), ptr, indices);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfb_gather_u64offset() {
     let offsets = svindex_u64(0, 8u32.try_into().unwrap());
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfb_gather_u64offset::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b64(),
-        I64_DATA.as_ptr(),
-        offsets,
-    );
+    let loaded =
+        svprfb_gather_u64offset::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b64(), ptr, offsets);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfh_gather_u64index() {
     let indices = svindex_u64(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfh_gather_u64index::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b64(),
-        I64_DATA.as_ptr(),
-        indices,
-    );
+    let loaded =
+        svprfh_gather_u64index::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b64(), ptr, indices);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfw_gather_u64index() {
     let indices = svindex_u64(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfw_gather_u64index::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b64(),
-        I64_DATA.as_ptr(),
-        indices,
-    );
+    let loaded =
+        svprfw_gather_u64index::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b64(), ptr, indices);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfd_gather_u64index() {
     let indices = svindex_u64(0, 1);
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfd_gather_u64index::<{ svprfop::SV_PLDL1KEEP }, i64>(
-        svptrue_b64(),
-        I64_DATA.as_ptr(),
-        indices,
-    );
+    let loaded =
+        svprfd_gather_u64index::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b64(), ptr, indices);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfb_gather_u64base() {
@@ -11202,23 +11418,27 @@ unsafe fn test_svprfd_gather_u64base_index() {
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfb_vnum() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfb_vnum::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b8(), I64_DATA.as_ptr(), 1);
+    let loaded = svprfb_vnum::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b8(), ptr, 1);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfh_vnum() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfh_vnum::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b16(), I64_DATA.as_ptr(), 1);
+    let loaded = svprfh_vnum::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b16(), ptr, 1);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfw_vnum() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfw_vnum::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b32(), I64_DATA.as_ptr(), 1);
+    let loaded = svprfw_vnum::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b32(), ptr, 1);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_svprfd_vnum() {
+    let ptr = I64_DATA.as_ptr();
     svsetffr();
-    let loaded = svprfd_vnum::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b64(), I64_DATA.as_ptr(), 1);
+    let loaded = svprfd_vnum::<{ svprfop::SV_PLDL1KEEP }, i64>(svptrue_b64(), ptr, 1);
 }
 #[simd_test(enable = "sve")]
 unsafe fn test_ffr() {

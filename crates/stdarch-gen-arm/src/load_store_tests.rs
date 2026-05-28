@@ -303,12 +303,12 @@ fn generate_single_test(
         (None, quote!())
     };
 
-    let ptr = if chars.gather_bases_type.is_some() {
-        quote!()
+    let (ptr_arg, init_ptr) = if chars.gather_bases_type.is_some() {
+        (quote!(), quote!())
     } else if chars.is_prf {
-        quote!(, I64_DATA.as_ptr())
+        (quote!(,ptr), quote!(let ptr = I64_DATA.as_ptr();))
     } else {
-        quote!(, #data_array.as_ptr())
+        (quote!(,ptr), quote!(let ptr = #data_array.as_ptr();))
     };
 
     let tuple_len = &chars.tuple_len;
@@ -385,6 +385,7 @@ fn generate_single_test(
         } else {
             (quote!(), quote!())
         };
+
         let args = quote!(#pred_fn() #store_ptr #vnum_arg #bases_arg #offset_arg #index_arg #offsets_arg #indices_arg);
         let call = if chars.uses_ffr {
             // Doing a normal load first maximises the number of elements our ff/nf test loads
@@ -429,7 +430,7 @@ fn generate_single_test(
             }
         })
     } else {
-        let args = quote!(#pred_fn() #ptr #vnum_arg #bases_arg #offset_arg #index_arg #offsets_arg #indices_arg);
+        let args = quote!(#pred_fn() #ptr_arg #vnum_arg #bases_arg #offset_arg #index_arg #offsets_arg #indices_arg);
         let call = if chars.uses_ffr {
             // Doing a normal load first maximises the number of elements our ff/nf test loads
             let non_ffr_fn_name = format_ident!(
@@ -439,6 +440,7 @@ fn generate_single_test(
                     .replace("svldnf1", "svld1")
             );
             quote! {
+                #init_ptr
                 svsetffr();
                 let _ = #non_ffr_fn_name(#args);
                 let loaded = #function(#args);
@@ -446,6 +448,7 @@ fn generate_single_test(
         } else {
             // Note that the FFR must be set for all tests as the assert functions mask against it
             quote! {
+                #init_ptr
                 svsetffr();
                 let loaded = #function(#args);
             }
