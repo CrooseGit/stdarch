@@ -92,7 +92,9 @@ cargo_test() {
 CORE_ARCH="--manifest-path=crates/core_arch/Cargo.toml"
 STDARCH_EXAMPLES="--manifest-path=examples/Cargo.toml"
 
-cargo_test "${CORE_ARCH}"
+for {1.20}; do
+  cargo_test "${CORE_ARCH}"
+done
 
 if [ "$NOSTD" != "1" ]; then
     cargo_test "${STDARCH_EXAMPLES}"
